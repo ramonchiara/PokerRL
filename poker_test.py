@@ -1,6 +1,6 @@
 import unittest
 
-from poker import Carta
+from poker import Carta, Baralho
 
 
 class CartaTest(unittest.TestCase):
@@ -46,6 +46,23 @@ class CartaTest(unittest.TestCase):
                     with self.assertRaises(ValueError) as ctx:
                         Carta(valor, naipe)
                     self.assertEqual(f'Carta({repr(valor)}, {repr(naipe)}) é inválida.', str(ctx.exception))
+
+    def test_quero_poder_verificar_se_duas_cartas_sao_iguais(self):
+        c1 = Carta(2, 'ouros')
+        c2 = Carta(2, 'ouros')
+        self.assertTrue(c1 == c2)
+
+
+class BaralhoTest(unittest.TestCase):
+
+    def test_quero_poder_criar_um_baralho_comum_de_52_cartas(self):
+        b = Baralho()
+        self.assertEqual(52, len(b))
+        for valor in Carta.VALORES:
+            for naipe in Carta.NAIPES:
+                with self.subTest(f'test_{valor}_de_{naipe}_deve_estar_no_baralho'):
+                    c = Carta(valor, naipe)
+                    self.assertIn(c, b)
 
 
 if __name__ == '__main__':

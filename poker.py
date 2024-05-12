@@ -15,3 +15,25 @@ class Carta:
     @property
     def naipe(self):
         return self._naipe
+
+    def __eq__(self, other):
+        return self._valor == other.valor and self._naipe == other.naipe
+
+
+class Baralho:
+
+    def __init__(self):
+        self._cartas = []
+        for naipe in Carta.NAIPES:
+            for valor in Carta.VALORES:
+                self._cartas.append(Carta(valor, naipe))
+
+    @property
+    def cartas(self):
+        return self._cartas
+
+    def __len__(self):
+        return len(self._cartas)
+
+    def __getitem__(self, item):
+        return self._cartas[item]
