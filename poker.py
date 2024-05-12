@@ -52,5 +52,5 @@ class Baralho:
     def __len__(self):
         return len(self._cartas)
 
-    def __getitem__(self, item):
-        return self._cartas[item]
+    def __iter__(self):
+        return iter(self._cartas)
