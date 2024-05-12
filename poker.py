@@ -16,6 +16,22 @@ class Carta:
     def naipe(self):
         return self._naipe
 
+    @staticmethod
+    def from_texto(texto):
+        resultado = []
+        valor = ''
+        for c in texto:
+            if c.isdigit() or c in ['J', 'Q', 'K', 'A'] or not valor:
+                valor += c
+                continue
+            else:
+                naipe = [naipe for naipe in Carta.NAIPES if naipe[0] == c]
+                naipe = naipe[0] if naipe else c
+                valor = int(valor) if valor.isdigit() else valor
+                resultado.append(Carta(valor, naipe))
+                valor = ''
+        return resultado
+
     def __repr__(self):
         return f'Carta({repr(self._valor)}, {repr(self._naipe)})'
 
