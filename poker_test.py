@@ -156,7 +156,7 @@ class BaralhoTest(unittest.TestCase):
         cartas = baralho.distribuir(5)
         self.assertEqual(5, len(cartas))
         self.assertEqual(47, len(baralho))
-        self.assertEqual([Carta('A', 'paus'), Carta('K', 'paus'), Carta('Q', 'paus'), Carta('J', 'paus'), Carta(10, 'paus')], cartas)
+        self.assertEqual(Carta.from_texto('ApKpQpJp10p'), cartas)
 
 
 if __name__ == '__main__':
