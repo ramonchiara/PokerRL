@@ -1,3 +1,6 @@
+import random
+
+
 class Carta:
     VALORES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
     NAIPES = ['ouros', 'espadas', 'copas', 'paus']
@@ -47,8 +50,14 @@ class Baralho:
             for valor in Carta.VALORES:
                 self._cartas.append(Carta(valor, naipe))
 
+    def embaralhar(self):
+        random.shuffle(self._cartas)
+
     def distribuir(self, n):
         return [self._cartas.pop() for _ in range(n)]
+
+    def __eq__(self, other):
+        return self._cartas == other._cartas
 
     def __len__(self):
         return len(self._cartas)

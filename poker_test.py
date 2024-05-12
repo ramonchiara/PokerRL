@@ -158,6 +158,27 @@ class BaralhoTest(unittest.TestCase):
         self.assertEqual(47, len(baralho))
         self.assertEqual(Carta.get_cartas('ApKpQpJp10p'), cartas)
 
+    def test_quero_poder_verificar_se_dois_baralhos_sao_iguais(self):
+        b1 = Baralho()
+        b2 = Baralho()
+        self.assertTrue(b1 == b2)
+
+        b1.distribuir(1)
+        self.assertFalse(b1 == b2)
+
+        b2.distribuir(1)
+        self.assertTrue(b1 == b2)
+
+    def test_quero_poder_embaralhar(self):
+        b = Baralho()
+        b.embaralhar()
+
+        baralho_novo = Baralho()
+        self.assertFalse(b == baralho_novo)
+
+        cartas = b.distribuir(5)
+        self.assertNotEqual(Carta.get_cartas('ApKpQpJp10p'), cartas)
+
 
 if __name__ == '__main__':
     unittest.main()
