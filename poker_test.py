@@ -22,7 +22,7 @@ class CartaTest(unittest.TestCase):
                     self.assertEqual(valor, c.valor)
                     self.assertEqual(naipe, c.naipe)
 
-    def test_deve_gerar_excecao_ao_criar_carta_invalidas(self):
+    def test_deve_gerar_excecao_ao_criar_carta_invalida(self):
         exemplos_de_valores_invalidos = [1, 11, '2', '10', 'j', 'q', 'r', 'a', 'V', 'D', 'R']
         exemplos_de_naipes_invalidos = ['Ouros', 'ESPADAS', 'diamonds', 'spades', 'hearts', 'clubs']
 
