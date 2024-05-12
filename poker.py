@@ -23,7 +23,6 @@ class Carta:
         for c in texto:
             if c.isdigit() or c in ['J', 'Q', 'K', 'A'] or not valor:
                 valor += c
-                continue
             else:
                 naipe = [naipe for naipe in Carta.NAIPES if naipe[0] == c]
                 naipe = naipe[0] if naipe else c
@@ -47,12 +46,8 @@ class Baralho:
             for valor in Carta.VALORES:
                 self._cartas.append(Carta(valor, naipe))
 
-    @property
-    def cartas(self):
-        return self._cartas
-
     def distribuir(self, n):
-        return [self.cartas.pop() for _ in range(n)]
+        return [self._cartas.pop() for _ in range(n)]
 
     def __len__(self):
         return len(self._cartas)
