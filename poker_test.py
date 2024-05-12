@@ -57,86 +57,86 @@ class CartaTest(unittest.TestCase):
         self.assertEqual("Carta(2, 'ouros')", repr(c))
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_2o(self):
-        cartas = Carta.from_texto('2o')
+        cartas = Carta.get_cartas('2o')
         self.assertEqual([Carta(2, 'ouros')], cartas)
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_3o(self):
-        cartas = Carta.from_texto('3o')
+        cartas = Carta.get_cartas('3o')
         self.assertEqual([Carta(3, 'ouros')], cartas)
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_4o(self):
-        cartas = Carta.from_texto('4o')
+        cartas = Carta.get_cartas('4o')
         self.assertEqual([Carta(4, 'ouros')], cartas)
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_10o(self):
-        cartas = Carta.from_texto('10o')
+        cartas = Carta.get_cartas('10o')
         self.assertEqual([Carta(10, 'ouros')], cartas)
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_Jo(self):
-        cartas = Carta.from_texto('Jo')
+        cartas = Carta.get_cartas('Jo')
         self.assertEqual([Carta('J', 'ouros')], cartas)
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_2e(self):
-        cartas = Carta.from_texto('2e')
+        cartas = Carta.get_cartas('2e')
         self.assertEqual([Carta(2, 'espadas')], cartas)
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_10e(self):
-        cartas = Carta.from_texto('10e')
+        cartas = Carta.get_cartas('10e')
         self.assertEqual([Carta(10, 'espadas')], cartas)
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_Je(self):
-        cartas = Carta.from_texto('Je')
+        cartas = Carta.get_cartas('Je')
         self.assertEqual([Carta('J', 'espadas')], cartas)
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_Qe(self):
-        cartas = Carta.from_texto('Qe')
+        cartas = Carta.get_cartas('Qe')
         self.assertEqual([Carta('Q', 'espadas')], cartas)
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_Kc(self):
-        cartas = Carta.from_texto('Kc')
+        cartas = Carta.get_cartas('Kc')
         self.assertEqual([Carta('K', 'copas')], cartas)
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_Ap(self):
-        cartas = Carta.from_texto('Ap')
+        cartas = Carta.get_cartas('Ap')
         self.assertEqual([Carta('A', 'paus')], cartas)
 
     def test_deve_gerar_excecao_ao_criar_carta_invalida_1o(self):
         with self.assertRaises(ValueError) as ctx:
-            Carta.from_texto('1o')
+            Carta.get_cartas('1o')
         self.assertEqual("Carta(1, 'ouros') é inválida.", str(ctx.exception))
 
     def test_deve_gerar_excecao_ao_criar_carta_invalida_11o(self):
         with self.assertRaises(ValueError) as ctx:
-            Carta.from_texto('11o')
+            Carta.get_cartas('11o')
         self.assertEqual("Carta(11, 'ouros') é inválida.", str(ctx.exception))
 
     def test_deve_gerar_excecao_ao_criar_carta_invalida_Ro(self):
         with self.assertRaises(ValueError) as ctx:
-            Carta.from_texto('Ro')
+            Carta.get_cartas('Ro')
         self.assertEqual("Carta('R', 'ouros') é inválida.", str(ctx.exception))
 
     def test_deve_gerar_excecao_ao_criar_carta_invalida_2d(self):
         with self.assertRaises(ValueError) as ctx:
-            Carta.from_texto('2d')
+            Carta.get_cartas('2d')
         self.assertEqual("Carta(2, 'd') é inválida.", str(ctx.exception))
 
     def test_deve_gerar_excecao_ao_criar_carta_invalida_10s(self):
         with self.assertRaises(ValueError) as ctx:
-            Carta.from_texto('10s')
+            Carta.get_cartas('10s')
         self.assertEqual("Carta(10, 's') é inválida.", str(ctx.exception))
 
     def test_deve_gerar_excecao_ao_criar_carta_invalida_Jh(self):
         with self.assertRaises(ValueError) as ctx:
-            Carta.from_texto('Jh')
+            Carta.get_cartas('Jh')
         self.assertEqual("Carta('J', 'h') é inválida.", str(ctx.exception))
 
     def test_deve_gerar_excecao_ao_criar_carta_invalida_AP(self):
         with self.assertRaises(ValueError) as ctx:
-            Carta.from_texto('AP')
+            Carta.get_cartas('AP')
         self.assertEqual("Carta('A', 'P') é inválida.", str(ctx.exception))
 
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto_2o3p(self):
-        cartas = Carta.from_texto('2o3p')
+        cartas = Carta.get_cartas('2o3p')
         self.assertEqual([Carta(2, 'ouros'), Carta(3, 'paus')], cartas)
 
 
@@ -156,7 +156,7 @@ class BaralhoTest(unittest.TestCase):
         cartas = baralho.distribuir(5)
         self.assertEqual(5, len(cartas))
         self.assertEqual(47, len(baralho))
-        self.assertEqual(Carta.from_texto('ApKpQpJp10p'), cartas)
+        self.assertEqual(Carta.get_cartas('ApKpQpJp10p'), cartas)
 
 
 if __name__ == '__main__':

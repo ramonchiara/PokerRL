@@ -17,7 +17,8 @@ class Carta:
         return self._naipe
 
     @staticmethod
-    def from_texto(texto):
+    def get_cartas(texto):
+        """Gera uma lista de cartas a partir de um texto do tipo 2o3p10cAe"""
         resultado = []
         valor = ''
         for c in texto:
