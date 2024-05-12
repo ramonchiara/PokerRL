@@ -16,6 +16,9 @@ class Carta:
     def naipe(self):
         return self._naipe
 
+    def __repr__(self):
+        return f'Carta({repr(self._valor)}, {repr(self._naipe)})'
+
     def __eq__(self, other):
         return self._valor == other.valor and self._naipe == other.naipe
 
@@ -31,6 +34,9 @@ class Baralho:
     @property
     def cartas(self):
         return self._cartas
+
+    def distribuir(self, n):
+        return [self.cartas.pop() for _ in range(n)]
 
     def __len__(self):
         return len(self._cartas)

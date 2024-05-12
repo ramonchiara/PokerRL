@@ -52,6 +52,10 @@ class CartaTest(unittest.TestCase):
         c2 = Carta(2, 'ouros')
         self.assertTrue(c1 == c2)
 
+    def test_repr(self):
+        c = Carta(2, 'ouros')
+        self.assertEqual("Carta(2, 'ouros')", repr(c))
+
 
 class BaralhoTest(unittest.TestCase):
 
@@ -63,6 +67,13 @@ class BaralhoTest(unittest.TestCase):
                 with self.subTest(f'test_{valor}_de_{naipe}_deve_estar_no_baralho'):
                     c = Carta(valor, naipe)
                     self.assertIn(c, b)
+
+    def test_quero_poder_distribuir_n_cartas(self):
+        baralho = Baralho()
+        cartas = baralho.distribuir(5)
+        self.assertEqual(5, len(cartas))
+        self.assertEqual(47, len(baralho))
+        self.assertEqual([Carta('A', 'paus'), Carta('K', 'paus'), Carta('Q', 'paus'), Carta('J', 'paus'), Carta(10, 'paus')], cartas)
 
 
 if __name__ == '__main__':
