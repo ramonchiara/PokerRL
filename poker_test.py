@@ -22,6 +22,31 @@ class CartaTest(unittest.TestCase):
                     self.assertEqual(valor, c.valor)
                     self.assertEqual(naipe, c.naipe)
 
+    def test_deve_gerar_excecao_ao_criar_carta_invalidas(self):
+        exemplos_de_valores_invalidos = [1, 11, '2', '10', 'j', 'q', 'r', 'a', 'V', 'D', 'R']
+        exemplos_de_naipes_invalidos = ['Ouros', 'ESPADAS', 'diamonds', 'spades', 'hearts', 'clubs']
+
+        for valor in exemplos_de_valores_invalidos:
+            for naipe in Carta.NAIPES:
+                with self.subTest(f'test_deve_gerar_excecao_ao_criar_um_{valor}_de_{naipe}'):
+                    with self.assertRaises(ValueError) as ctx:
+                        Carta(valor, naipe)
+                    self.assertEqual(f'Carta({repr(valor)}, {repr(naipe)}) é inválida.', str(ctx.exception))
+
+        for valor in Carta.VALORES:
+            for naipe in exemplos_de_naipes_invalidos:
+                with self.subTest(f'test_deve_gerar_excecao_ao_criar_um_{valor}_de_{naipe}'):
+                    with self.assertRaises(ValueError) as ctx:
+                        Carta(valor, naipe)
+                    self.assertEqual(f'Carta({repr(valor)}, {repr(naipe)}) é inválida.', str(ctx.exception))
+
+        for valor in exemplos_de_valores_invalidos:
+            for naipe in exemplos_de_naipes_invalidos:
+                with self.subTest(f'test_deve_gerar_excecao_ao_criar_um_{valor}_de_{naipe}'):
+                    with self.assertRaises(ValueError) as ctx:
+                        Carta(valor, naipe)
+                    self.assertEqual(f'Carta({repr(valor)}, {repr(naipe)}) é inválida.', str(ctx.exception))
+
 
 if __name__ == '__main__':
     unittest.main()

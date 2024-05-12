@@ -3,6 +3,8 @@ class Carta:
     NAIPES = ['ouros', 'espadas', 'copas', 'paus']
 
     def __init__(self, valor, naipe):
+        if valor not in Carta.VALORES or naipe not in Carta.NAIPES:
+            raise ValueError(f'Carta({repr(valor)}, {repr(naipe)}) é inválida.')
         self._valor = valor
         self._naipe = naipe
 
