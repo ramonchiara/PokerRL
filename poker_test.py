@@ -1,6 +1,6 @@
 import unittest
 
-from poker import Carta, Baralho
+from poker import Carta, Baralho, Mao
 
 
 class CartaTest(unittest.TestCase):
@@ -180,6 +180,35 @@ class BaralhoTest(unittest.TestCase):
         cartas = b.distribuir(5)
         cartas_iniciais_de_um_baralho_novo = baralho_novo.distribuir(5)
         self.assertNotEqual(cartas_iniciais_de_um_baralho_novo, cartas)
+
+
+class MaoTest(unittest.TestCase):
+
+    def test_quero_poder_criar_uma_mao_de_poker(self):
+        baralho = Baralho()
+        cartas = baralho.distribuir(5)
+        mao = Mao(cartas)
+        self.assertEqual(cartas, mao.cartas)
+
+    def test_deve_gerar_excecao_se_mao_com_menos_de_5_cartas(self):
+        with self.assertRaises(ValueError) as ctx:
+            baralho = Baralho()
+            cartas = baralho.distribuir(4)
+            Mao(cartas)
+        self.assertEqual('Quantidade inválida de cartas: 4.', str(ctx.exception))
+
+    def test_deve_gerar_excecao_se_mao_com_mais_de_5_cartas(self):
+        with self.assertRaises(ValueError) as ctx:
+            baralho = Baralho()
+            cartas = baralho.distribuir(6)
+            Mao(cartas)
+        self.assertEqual('Quantidade inválida de cartas: 6.', str(ctx.exception))
+
+    def test_deve_gerar_excecao_se_mao_com_cartas_iguais(self):
+        with self.assertRaises(ValueError) as ctx:
+            cartas = Carta.get_cartas('2o3o4o5o2o')
+            Mao(cartas)
+        self.assertEqual('Quantidade inválida de cartas: 4.', str(ctx.exception))
 
 
 if __name__ == '__main__':

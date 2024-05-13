@@ -41,6 +41,9 @@ class Carta:
     def __eq__(self, other):
         return self._valor == other.valor and self._naipe == other.naipe
 
+    def __hash__(self):
+        return hash((self.valor, self.naipe))
+
 
 class Baralho:
 
@@ -68,3 +71,16 @@ class Baralho:
 
     def __iter__(self):
         return iter(self._cartas)
+
+
+class Mao:
+
+    def __init__(self, cartas):
+        n = len(set(cartas))
+        if n != 5:
+            raise ValueError(f'Quantidade inválida de cartas: {n}.')
+        self._cartas = cartas
+
+    @property
+    def cartas(self):
+        return self._cartas
