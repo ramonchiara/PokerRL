@@ -41,6 +41,11 @@ class Carta:
     def __eq__(self, other):
         return self._valor == other.valor and self._naipe == other.naipe
 
+    def __lt__(self, other):
+        valor1, naipe1 = Carta.VALORES.index(self._valor), Carta.NAIPES.index(self._naipe)
+        valor2, naipe2 = Carta.VALORES.index(other.valor), Carta.NAIPES.index(other.naipe)
+        return valor1 < valor2 if valor1 != valor2 else naipe1 < naipe2
+
     def __hash__(self):
         return hash((self.valor, self.naipe))
 
@@ -79,7 +84,8 @@ class Mao:
         n = len(set(cartas))
         if n != 5:
             raise ValueError(f'Quantidade inválida de cartas: {n}.')
-        self._cartas = cartas
+        self._cartas = sorted(cartas)
+        self._cartas.reverse()
 
     @property
     def cartas(self):

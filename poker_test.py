@@ -139,6 +139,24 @@ class CartaTest(unittest.TestCase):
         cartas = Carta.get_cartas('2o3p')
         self.assertEqual([Carta(2, 'ouros'), Carta(3, 'paus')], cartas)
 
+    def test_quero_poder_comparar_cartas(self):
+        c1 = Carta(2, 'paus')
+        c2 = Carta(3, 'copas')
+        c3 = Carta(4, 'espadas')
+        c4 = Carta(5, 'ouros')
+        self.assertTrue(c1 < c2)
+        self.assertTrue(c2 < c3)
+        self.assertTrue(c3 < c4)
+
+    def test_apesar_de_nao_valer_para_poker_quero_ordenar_ouros_espadas_copas_e_paus_nessa_ordem(self):
+        c1 = Carta(2, 'ouros')
+        c2 = Carta(2, 'espadas')
+        c3 = Carta(2, 'copas')
+        c4 = Carta(2, 'paus')
+        self.assertTrue(c1 < c2)
+        self.assertTrue(c2 < c3)
+        self.assertTrue(c3 < c4)
+
 
 class BaralhoTest(unittest.TestCase):
 
@@ -209,6 +227,13 @@ class MaoTest(unittest.TestCase):
             cartas = Carta.get_cartas('2o3o4o5o2o')
             Mao(cartas)
         self.assertEqual('Quantidade inválida de cartas: 4.', str(ctx.exception))
+
+    def test_cartas_da_mao_devem_estar_ordenadas_da_maior_para_a_menor(self):
+        mao = Mao(Carta.get_cartas('2o3o4o5o6o'))
+        self.assertEqual(Carta.get_cartas('6o5o4o3o2o'), mao.cartas)
+
+        mao = Mao(Carta.get_cartas('4c3e2o4o4p'))
+        self.assertEqual(Carta.get_cartas('4p4c4o3e2o'), mao.cartas)
 
 
 if __name__ == '__main__':
