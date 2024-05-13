@@ -50,6 +50,10 @@ class Baralho:
             for valor in Carta.VALORES:
                 self._cartas.append(Carta(valor, naipe))
 
+    @property
+    def cartas(self):
+        return self._cartas
+
     def embaralhar(self):
         random.shuffle(self._cartas)
 
@@ -57,7 +61,7 @@ class Baralho:
         return [self._cartas.pop() for _ in range(n)]
 
     def __eq__(self, other):
-        return self._cartas == other._cartas
+        return self._cartas == other.cartas
 
     def __len__(self):
         return len(self._cartas)
