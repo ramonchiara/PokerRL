@@ -156,7 +156,8 @@ class BaralhoTest(unittest.TestCase):
         cartas = baralho.distribuir(5)
         self.assertEqual(5, len(cartas))
         self.assertEqual(47, len(baralho))
-        self.assertEqual(Carta.get_cartas('ApKpQpJp10p'), cartas)
+        cartas_iniciais_de_um_baralho_novo = Carta.get_cartas('ApKpQpJp10p')
+        self.assertEqual(cartas_iniciais_de_um_baralho_novo, cartas)
 
     def test_quero_poder_verificar_se_dois_baralhos_sao_iguais(self):
         b1 = Baralho()
@@ -177,7 +178,8 @@ class BaralhoTest(unittest.TestCase):
         self.assertFalse(b == baralho_novo)
 
         cartas = b.distribuir(5)
-        self.assertNotEqual(Carta.get_cartas('ApKpQpJp10p'), cartas)
+        cartas_iniciais_de_um_baralho_novo = baralho_novo.distribuir(5)
+        self.assertNotEqual(cartas_iniciais_de_um_baralho_novo, cartas)
 
 
 if __name__ == '__main__':
