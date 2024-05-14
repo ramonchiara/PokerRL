@@ -235,6 +235,24 @@ class MaoTest(unittest.TestCase):
         mao = Mao(Carta.get_cartas('4c3e2o4o4p'))
         self.assertEqual(Carta.get_cartas('4p4c4o3e2o'), mao.cartas)
 
+    def test_cartas_da_mao_devem_estar_ordenadas_da_maior_para_a_menor_casos_54321(self):
+        maior_carta = Mao(Carta.get_cartas('5o6e10eJcAe'))
+        self.assertEqual(Carta.get_cartas('AeJc10e6e5o'), maior_carta.cartas)
+
+        straight = Mao(Carta.get_cartas('2o3p4c5e6c'))
+        self.assertEqual(Carta.get_cartas('6c5e4c3p2o'), straight.cartas)
+
+        wheel = Mao(Carta.get_cartas('Ae2o3p4c5e'))
+        self.assertEqual(Carta.get_cartas('5e4c3p2oAe'), wheel.cartas)
+
+        flush = Mao(Carta.get_cartas('2o7o9oJoKo'))
+        self.assertEqual(Carta.get_cartas('KoJo9o7o2o'), flush.cartas)
+
+        straight_flush = Mao(Carta.get_cartas('5p6p7p8p9p'))
+        self.assertEqual(Carta.get_cartas('9p8p7p6p5p'), straight_flush.cartas)
+
+        royal_flush = Mao(Carta.get_cartas('10eJeQeKeAe'))
+        self.assertEqual(Carta.get_cartas('AeKeQeJe10e'), royal_flush.cartas)
 
 if __name__ == '__main__':
     unittest.main()

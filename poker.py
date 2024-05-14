@@ -86,6 +86,12 @@ class Mao:
             raise ValueError(f'Quantidade inválida de cartas: {n}.')
         self._cartas = sorted(cartas)
         self._cartas.reverse()
+        self._ajusta_caso_wheel()
+
+    def _ajusta_caso_wheel(self):
+        valores = [c.valor for c in self._cartas]
+        if valores == ['A', 5, 4, 3, 2]:
+            self._cartas = self._cartas[1:] + [self._cartas[0]]
 
     @property
     def cartas(self):
