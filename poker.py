@@ -19,6 +19,14 @@ class Carta:
     def naipe(self):
         return self._naipe
 
+    @property
+    def rank(self):
+        return Carta.VALORES.index(self._valor)
+
+    @property
+    def naipe_rank(self):
+        return Carta.NAIPES.index(self._naipe)
+
     @staticmethod
     def get_cartas(texto):
         """Gera uma lista de cartas a partir de um texto do tipo 2o3p10cAe"""
@@ -42,9 +50,9 @@ class Carta:
         return self._valor == other.valor and self._naipe == other.naipe
 
     def __lt__(self, other):
-        valor1, naipe1 = Carta.VALORES.index(self._valor), Carta.NAIPES.index(self._naipe)
-        valor2, naipe2 = Carta.VALORES.index(other.valor), Carta.NAIPES.index(other.naipe)
-        return valor1 < valor2 if valor1 != valor2 else naipe1 < naipe2
+        rank1, naipe1 = self.rank, self.naipe_rank
+        rank2, naipe2 = other.rank, other.naipe_rank
+        return rank1 < rank2 if rank1 != rank2 else naipe1 < naipe2
 
     def __hash__(self):
         return hash((self.valor, self.naipe))
@@ -96,3 +104,8 @@ class Mao:
     @property
     def cartas(self):
         return self._cartas
+
+    def is_straight(self):
+        ranks = [c.rank for c in self._cartas]
+        straight = [(self._cartas[0].rank - i) % len(Carta.VALORES) for i in range(5)]
+        return ranks == straight

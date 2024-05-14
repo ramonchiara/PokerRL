@@ -157,6 +157,36 @@ class CartaTest(unittest.TestCase):
         self.assertTrue(c2 < c3)
         self.assertTrue(c3 < c4)
 
+    def test_valor_rank(self):
+        self.assertEqual(0, Carta(2, 'ouros').rank)
+        self.assertEqual(1, Carta(3, 'espadas').rank)
+        self.assertEqual(2, Carta(4, 'copas').rank)
+        self.assertEqual(3, Carta(5, 'paus').rank)
+        self.assertEqual(4, Carta(6, 'ouros').rank)
+        self.assertEqual(5, Carta(7, 'espadas').rank)
+        self.assertEqual(6, Carta(8, 'copas').rank)
+        self.assertEqual(7, Carta(9, 'paus').rank)
+        self.assertEqual(8, Carta(10, 'ouros').rank)
+        self.assertEqual(9, Carta('J', 'espadas').rank)
+        self.assertEqual(10, Carta('Q', 'copas').rank)
+        self.assertEqual(11, Carta('K', 'paus').rank)
+        self.assertEqual(12, Carta('A', 'ouros').rank)
+
+    def test_naipe_rank(self):
+        self.assertEqual(0, Carta(2, 'ouros').naipe_rank)
+        self.assertEqual(1, Carta(3, 'espadas').naipe_rank)
+        self.assertEqual(2, Carta(4, 'copas').naipe_rank)
+        self.assertEqual(3, Carta(5, 'paus').naipe_rank)
+        self.assertEqual(0, Carta(6, 'ouros').naipe_rank)
+        self.assertEqual(1, Carta(7, 'espadas').naipe_rank)
+        self.assertEqual(2, Carta(8, 'copas').naipe_rank)
+        self.assertEqual(3, Carta(9, 'paus').naipe_rank)
+        self.assertEqual(0, Carta(10, 'ouros').naipe_rank)
+        self.assertEqual(1, Carta('J', 'espadas').naipe_rank)
+        self.assertEqual(2, Carta('Q', 'copas').naipe_rank)
+        self.assertEqual(3, Carta('K', 'paus').naipe_rank)
+        self.assertEqual(0, Carta('A', 'ouros').naipe_rank)
+
 
 class BaralhoTest(unittest.TestCase):
 
@@ -253,6 +283,20 @@ class MaoTest(unittest.TestCase):
 
         royal_flush = Mao(Carta.get_cartas('10eJeQeKeAe'))
         self.assertEqual(Carta.get_cartas('AeKeQeJe10e'), royal_flush.cartas)
+
+    def test_mao_is_straight(self):
+        straight = Mao(Carta.get_cartas('2o3p4c5e6c'))
+        self.assertTrue(straight.is_straight())
+
+        wheel = Mao(Carta.get_cartas('Ae2o3p4c5e'))
+        self.assertTrue(wheel.is_straight())
+
+        straight_flush = Mao(Carta.get_cartas('5p6p7p8p9p'))
+        self.assertTrue(straight_flush.is_straight())
+
+        royal_flush = Mao(Carta.get_cartas('10eJeQeKeAe'))
+        self.assertTrue(royal_flush.is_straight())
+
 
 if __name__ == '__main__':
     unittest.main()
