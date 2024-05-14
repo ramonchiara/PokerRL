@@ -36,8 +36,8 @@ class Carta:
             if c.isdigit() or c in ['J', 'Q', 'K', 'A'] or not valor:
                 valor += c
             else:
-                naipe = [naipe for naipe in Carta.NAIPES if naipe[0] == c]
-                naipe = naipe[0] if naipe else c
+                busca_naipe = [naipe for naipe in Carta.NAIPES if naipe[0] == c]
+                naipe = busca_naipe[0] if busca_naipe else c
                 valor = int(valor) if valor.isdigit() else valor
                 resultado.append(Carta(valor, naipe))
                 valor = ''
@@ -50,12 +50,12 @@ class Carta:
         return self._valor == other.valor and self._naipe == other.naipe
 
     def __lt__(self, other):
-        rank1, naipe1 = self.rank, self.naipe_rank
-        rank2, naipe2 = other.rank, other.naipe_rank
-        return rank1 < rank2 if rank1 != rank2 else naipe1 < naipe2
+        rank1, naipe_rank1 = self.rank, self.naipe_rank
+        rank2, naipe_rank2 = other.rank, other.naipe_rank
+        return rank1 < rank2 if rank1 != rank2 else naipe_rank1 < naipe_rank2
 
     def __hash__(self):
-        return hash((self.valor, self.naipe))
+        return hash((self._valor, self._naipe))
 
 
 class Baralho:
@@ -87,10 +87,11 @@ class Baralho:
 
 
 class Mao:
+    TAMANHO = 5
 
     def __init__(self, cartas):
         n = len(set(cartas))
-        if n != 5:
+        if n != Mao.TAMANHO:
             raise ValueError(f'Quantidade inválida de cartas: {n}.')
         self._cartas = sorted(cartas)
         self._cartas.reverse()
@@ -107,5 +108,5 @@ class Mao:
 
     def is_straight(self):
         ranks = [c.rank for c in self._cartas]
-        straight = [(self._cartas[0].rank - i) % len(Carta.VALORES) for i in range(5)]
+        straight = [(self._cartas[0].rank - i) % len(Carta.VALORES) for i in range(Mao.TAMANHO)]
         return ranks == straight
