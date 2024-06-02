@@ -297,6 +297,16 @@ class MaoTest(unittest.TestCase):
         royal_flush = Mao(Carta.get_cartas('10eJeQeKeAe'))
         self.assertTrue(royal_flush.is_straight())
 
+    def test_mao_is_flush(self):
+        flush = Mao(Carta.get_cartas('5p6p7p8p10p'))
+        self.assertTrue(flush.is_flush())
+
+        um_par = Mao(Carta.get_cartas('5p6p7p8p8c'))
+        self.assertFalse(um_par.is_flush())
+
+        straight_flush = Mao(Carta.get_cartas('5p6p7p8p9p'))
+        self.assertFalse(straight_flush.is_flush())
+
 
 if __name__ == '__main__':
     unittest.main()

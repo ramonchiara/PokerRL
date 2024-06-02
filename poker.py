@@ -110,3 +110,6 @@ class Mao:
         ranks = [c.rank for c in self._cartas]
         straight = [(self._cartas[0].rank - i) % len(Carta.VALORES) for i in range(Mao.TAMANHO)]
         return ranks == straight
+
+    def is_flush(self):
+        return len(set(c.naipe for c in self._cartas)) == 1 and not self.is_straight()
