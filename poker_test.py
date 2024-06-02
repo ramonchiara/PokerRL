@@ -358,6 +358,22 @@ class MaoTest(unittest.TestCase):
         quadra = Mao(Carta.get_cartas('5o5e5c5p9o'))
         self.assertFalse(quadra.is_full_house())
 
+    def test_mao_is_trinca(self):
+        um_par = Mao(Carta.get_cartas('5p6p7p8p8c'))
+        self.assertFalse(um_par.is_trinca())
+
+        dois_pares = Mao(Carta.get_cartas('7o7e8c8o9e'))
+        self.assertFalse(dois_pares.is_trinca())
+
+        trinca = Mao(Carta.get_cartas('7o7e7c8o9e'))
+        self.assertTrue(trinca.is_trinca())
+
+        full_house = Mao(Carta.get_cartas('7o7e7c8o8e'))
+        self.assertFalse(full_house.is_trinca())
+
+        quadra = Mao(Carta.get_cartas('5o5e5c5p9o'))
+        self.assertFalse(quadra.is_trinca())
+
 
 if __name__ == '__main__':
     unittest.main()
