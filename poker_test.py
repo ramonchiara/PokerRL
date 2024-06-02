@@ -326,6 +326,22 @@ class MaoTest(unittest.TestCase):
         flush = Mao(Carta.get_cartas('5p6p7p8p10p'))
         self.assertFalse(flush.is_straight_flush())
 
+    def test_mao_is_quadra(self):
+        um_par = Mao(Carta.get_cartas('5p6p7p8p8c'))
+        self.assertFalse(um_par.is_quadra())
+
+        dois_pares = Mao(Carta.get_cartas('7o7e8c8o9e'))
+        self.assertFalse(dois_pares.is_quadra())
+
+        trinca = Mao(Carta.get_cartas('7o7e7c8o9e'))
+        self.assertFalse(trinca.is_quadra())
+
+        full_house = Mao(Carta.get_cartas('7o7e7c8o8e'))
+        self.assertFalse(full_house.is_quadra())
+
+        quadra = Mao(Carta.get_cartas('5o5e5c5p9o'))
+        self.assertTrue(quadra.is_quadra())
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,4 +1,5 @@
 import random
+from collections import Counter
 
 
 class Carta:
@@ -122,3 +123,12 @@ class Mao:
 
     def is_straight_flush(self):
         return self._is_sequencia() and self._is_mesmo_naipe()
+
+    def _get_repeticoes(self):
+        valores = [c.valor for c in self._cartas]
+        quantidades = Counter(valores)
+        repetidas = Counter(quantidades.values())
+        return tuple(repetidas.get(n, 0) for n in range(1, 5))
+
+    def is_quadra(self):
+        return self._get_repeticoes() == (1, 0, 0, 1)
