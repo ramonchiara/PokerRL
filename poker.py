@@ -138,3 +138,6 @@ class Mao:
 
     def is_trinca(self):
         return self._get_repeticoes() == (2, 0, 1, 0)
+
+    def is_dois_pares(self):
+        return self._get_repeticoes() == (1, 2, 0, 0)
