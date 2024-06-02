@@ -106,10 +106,19 @@ class Mao:
     def cartas(self):
         return self._cartas
 
-    def is_straight(self):
+    def _is_sequencia(self):
         ranks = [c.rank for c in self._cartas]
         straight = [(self._cartas[0].rank - i) % len(Carta.VALORES) for i in range(Mao.TAMANHO)]
         return ranks == straight
 
+    def _is_mesmo_naipe(self):
+        return len(set(c.naipe for c in self._cartas)) == 1
+
+    def is_straight(self):
+        return self._is_sequencia() and not self._is_mesmo_naipe()
+
     def is_flush(self):
-        return len(set(c.naipe for c in self._cartas)) == 1 and not self.is_straight()
+        return self._is_mesmo_naipe() and not self._is_sequencia()
+
+    def is_straight_flush(self):
+        return self._is_sequencia() and self._is_mesmo_naipe()

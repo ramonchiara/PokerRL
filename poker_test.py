@@ -292,10 +292,10 @@ class MaoTest(unittest.TestCase):
         self.assertTrue(wheel.is_straight())
 
         straight_flush = Mao(Carta.get_cartas('5p6p7p8p9p'))
-        self.assertTrue(straight_flush.is_straight())
+        self.assertFalse(straight_flush.is_straight())
 
         royal_flush = Mao(Carta.get_cartas('10eJeQeKeAe'))
-        self.assertTrue(royal_flush.is_straight())
+        self.assertFalse(royal_flush.is_straight())
 
     def test_mao_is_flush(self):
         flush = Mao(Carta.get_cartas('5p6p7p8p10p'))
@@ -306,6 +306,25 @@ class MaoTest(unittest.TestCase):
 
         straight_flush = Mao(Carta.get_cartas('5p6p7p8p9p'))
         self.assertFalse(straight_flush.is_flush())
+
+    def test_mao_is_straight_flush(self):
+        straight = Mao(Carta.get_cartas('2o3p4c5e6c'))
+        self.assertFalse(straight.is_straight_flush())
+
+        wheel = Mao(Carta.get_cartas('Ae2o3p4c5e'))
+        self.assertFalse(wheel.is_straight_flush())
+
+        wheel_flush = Mao(Carta.get_cartas('Ae2e3e4e5e'))
+        self.assertTrue(wheel_flush.is_straight_flush())
+
+        straight_flush = Mao(Carta.get_cartas('5p6p7p8p9p'))
+        self.assertTrue(straight_flush.is_straight_flush())
+
+        royal_flush = Mao(Carta.get_cartas('10eJeQeKeAe'))
+        self.assertTrue(royal_flush.is_straight_flush())
+
+        flush = Mao(Carta.get_cartas('5p6p7p8p10p'))
+        self.assertFalse(flush.is_straight_flush())
 
 
 if __name__ == '__main__':
