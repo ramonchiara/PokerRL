@@ -132,3 +132,6 @@ class Mao:
 
     def is_quadra(self):
         return self._get_repeticoes() == (1, 0, 0, 1)
+
+    def is_full_house(self):
+        return self._get_repeticoes() == (0, 1, 1, 0)
