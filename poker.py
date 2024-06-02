@@ -141,3 +141,6 @@ class Mao:
 
     def is_dois_pares(self):
         return self._get_repeticoes() == (1, 2, 0, 0)
+
+    def is_um_par(self):
+        return self._get_repeticoes() == (3, 1, 0, 0)

@@ -390,6 +390,22 @@ class MaoTest(unittest.TestCase):
         quadra = Mao(Carta.get_cartas('5o5e5c5p9o'))
         self.assertFalse(quadra.is_dois_pares())
 
+    def test_mao_is_um_par(self):
+        um_par = Mao(Carta.get_cartas('5p6p7p8p8c'))
+        self.assertTrue(um_par.is_um_par())
+
+        dois_pares = Mao(Carta.get_cartas('7o7e8c8o9e'))
+        self.assertFalse(dois_pares.is_um_par())
+
+        trinca = Mao(Carta.get_cartas('7o7e7c8o9e'))
+        self.assertFalse(trinca.is_um_par())
+
+        full_house = Mao(Carta.get_cartas('7o7e7c8o8e'))
+        self.assertFalse(full_house.is_um_par())
+
+        quadra = Mao(Carta.get_cartas('5o5e5c5p9o'))
+        self.assertFalse(quadra.is_um_par())
+
 
 if __name__ == '__main__':
     unittest.main()
