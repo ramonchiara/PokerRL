@@ -141,3 +141,15 @@ class Mao:
 
     def is_um_par(self):
         return self._get_repeticoes() == (3, 1, 0, 0)
+
+    def is_maior_carta(self):
+        return not any([
+            self.is_um_par(),
+            self.is_dois_pares(),
+            self.is_trinca(),
+            self.is_straight(),
+            self.is_flush(),
+            self.is_full_house(),
+            self.is_quadra(),
+            self.is_straight_flush()
+        ])

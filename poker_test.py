@@ -243,7 +243,8 @@ class MaoTest(unittest.TestCase):
             'straight',
             'trinca',
             'dois_pares',
-            'um_par'
+            'um_par',
+            'maior_carta'
         ]
         testes = [
             ['10eJeQeKeAe', 'straight_flush'],
@@ -257,7 +258,8 @@ class MaoTest(unittest.TestCase):
             ['Ae2o3p4c5e', 'straight'],
             ['7o7e7c8o9e', 'trinca'],
             ['7o7e8c8o9e', 'dois_pares'],
-            ['5p6p7p8p8c', 'um_par']
+            ['5p6p7p8p8c', 'um_par'],
+            ['5o6e10eJcAe', 'maior_carta']
         ]
         for teste in testes:
             texto = teste[0]
