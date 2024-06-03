@@ -21,11 +21,11 @@ class Carta:
         return self._naipe
 
     @property
-    def rank(self):
+    def indice_valor(self):
         return Carta.VALORES.index(self._valor)
 
     @property
-    def naipe_rank(self):
+    def indice_naipe(self):
         return Carta.NAIPES.index(self._naipe)
 
     @staticmethod
@@ -34,7 +34,7 @@ class Carta:
         resultado = []
         valor = ''
         for c in texto:
-            if c.isdigit() or c in ['J', 'Q', 'K', 'A'] or not valor:
+            if not valor or c.isdigit() or c in ['J', 'Q', 'K', 'A']:
                 valor += c
             else:
                 busca_naipe = [naipe for naipe in Carta.NAIPES if naipe[0] == c]
@@ -51,9 +51,9 @@ class Carta:
         return self._valor == other.valor and self._naipe == other.naipe
 
     def __lt__(self, other):
-        rank1, naipe_rank1 = self.rank, self.naipe_rank
-        rank2, naipe_rank2 = other.rank, other.naipe_rank
-        return rank1 < rank2 if rank1 != rank2 else naipe_rank1 < naipe_rank2
+        v1, n1 = self.indice_valor, self.indice_naipe
+        v2, n2 = other.indice_valor, other.indice_naipe
+        return v1 < v2 if v1 != v2 else n1 < n2
 
     def __hash__(self):
         return hash((self._valor, self._naipe))
@@ -62,10 +62,7 @@ class Carta:
 class Baralho:
 
     def __init__(self):
-        self._cartas = []
-        for naipe in Carta.NAIPES:
-            for valor in Carta.VALORES:
-                self._cartas.append(Carta(valor, naipe))
+        self._cartas = [Carta(valor, naipe) for naipe in Carta.NAIPES for valor in Carta.VALORES]
 
     @property
     def cartas(self):
@@ -74,8 +71,8 @@ class Baralho:
     def embaralhar(self):
         random.shuffle(self._cartas)
 
-    def distribuir(self, n):
-        return [self._cartas.pop() for _ in range(n)]
+    def distribuir(self, n_cartas):
+        return [self._cartas.pop() for _ in range(n_cartas)]
 
     def __eq__(self, other):
         return self._cartas == other.cartas
@@ -108,8 +105,8 @@ class Mao:
         return self._cartas
 
     def _is_sequencia(self):
-        ranks = [c.rank for c in self._cartas]
-        straight = [(self._cartas[0].rank - i) % len(Carta.VALORES) for i in range(Mao.TAMANHO)]
+        ranks = [c.indice_valor for c in self._cartas]
+        straight = [(self._cartas[0].indice_valor - i) % len(Carta.VALORES) for i in range(Mao.TAMANHO)]
         return ranks == straight
 
     def _is_mesmo_naipe(self):
