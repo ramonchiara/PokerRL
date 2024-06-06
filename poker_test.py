@@ -234,7 +234,7 @@ class MaoTest(unittest.TestCase):
                 mao = Mao(Carta.get_cartas(texto))
                 self.assertEqual(Carta.get_cartas(expected), mao.cartas)
 
-    def test_mao_is_tipo(self):
+    def test_quero_saber_se_mao_is_tipo_e_se_nao_eh_de_outro_tipo(self):
         tipos = [
             'straight_flush',
             'quadra',
