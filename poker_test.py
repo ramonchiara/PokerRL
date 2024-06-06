@@ -324,6 +324,12 @@ class MaoTest(unittest.TestCase):
         self.assertTrue(m1 < m2)
         self.assertFalse(m2 < m1)
 
+        m1 = Mao(Carta.get_cartas('5o6e10eJcAe'))
+        m2 = Mao(Carta.get_cartas('5o6e10eQcAe'))
+        self.assertTrue(m1 == m2)
+        self.assertTrue(m1 < m2)
+        self.assertFalse(m2 < m1)
+
 
 if __name__ == '__main__':
     unittest.main()
