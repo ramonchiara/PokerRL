@@ -294,7 +294,7 @@ class MaoTest(unittest.TestCase):
                 self.assertEqual(tipo, mao.tipo)
                 self.assertEqual(rank, mao.rank)
 
-    def test_quero_poder_comparar_maos(self):
+    def test_quero_poder_comparar_duas_maos_de_tipos_diferentes(self):
         maos_em_ordem = ['5o6e10eJcAe', '5p6p7p8p8c', '7o7e8c8o9e', '7o7e7c8o9e', '10eJeQeKeAc', '5p6p7p8p10p', '7o7e7c8o8e', '5o5e5c5p9o', '5p6p7p8p9p']
         for i in range(len(maos_em_ordem) - 1):
             texto1 = maos_em_ordem[i]
@@ -303,6 +303,7 @@ class MaoTest(unittest.TestCase):
                 m1 = Mao(Carta.get_cartas(texto1))
                 m2 = Mao(Carta.get_cartas(texto2))
                 self.assertTrue(m1 < m2)
+                self.assertFalse(m2 < m1)
 
     def test_quero_poder_comparar_duas_maos_de_mesmo_tipo(self):
         m1 = Mao(Carta.get_cartas('5o6e10eJcAe'))
