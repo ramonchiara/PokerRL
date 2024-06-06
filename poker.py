@@ -164,3 +164,6 @@ class Mao:
             self.is_quadra(),
             self.is_straight_flush()
         ])
+
+    def __lt__(self, other):
+        return self.rank < other.rank
