@@ -86,6 +86,7 @@ class Baralho:
 
 class Mao:
     TAMANHO = 5
+    TIPOS = ['menor carta', 'um par', 'dois pares', 'trinca', 'straight', 'flush', 'full house', 'quadra', 'straight flush']
 
     def __init__(self, cartas):
         n = len(set(cartas))
