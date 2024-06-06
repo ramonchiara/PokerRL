@@ -295,7 +295,7 @@ class MaoTest(unittest.TestCase):
                 self.assertEqual(rank, mao.rank)
 
     def test_quero_poder_comparar_duas_maos_de_tipos_diferentes(self):
-        maos_em_ordem = ['5o6e10eJcAe', '5p6p7p8p8c', '7o7e8c8o9e', '7o7e7c8o9e', '10eJeQeKeAc', '5p6p7p8p10p', '7o7e7c8o8e', '5o5e5c5p9o', '5p6p7p8p9p']
+        maos_em_ordem = ['5o6e10eJcAe', '5p6p7p8p8c', '7o7e8e8o9e', '2o2e2c8c9c', '10eJeQeKeAc', '5p6p7p8p10p', '7o7e7c8o8e', '4o4e4c4p9o', '5p6p7p8p9p']
         for i in range(len(maos_em_ordem) - 1):
             texto1 = maos_em_ordem[i]
             texto2 = maos_em_ordem[i + 1]
@@ -307,28 +307,34 @@ class MaoTest(unittest.TestCase):
 
     def test_quero_poder_comparar_duas_maos_de_mesmo_tipo_maior_carta(self):
         m1 = Mao(Carta.get_cartas('5o6e10eJcAe'))
-        m2 = Mao(Carta.get_cartas('5o6e10eJcAe'))
-        self.assertTrue(m1 == m2)
-        self.assertFalse(m1 < m2)
-        self.assertFalse(m2 < m1)
-
-        m1 = Mao(Carta.get_cartas('5o6e10eJcAe'))
-        m2 = Mao(Carta.get_cartas('5o6e10eJcAc'))
+        m2 = Mao(Carta.get_cartas('5e6c10cJpAc'))
         self.assertTrue(m1 == m2)
         self.assertFalse(m1 < m2)
         self.assertFalse(m2 < m1)
 
         m1 = Mao(Carta.get_cartas('5o6e10eJcKe'))
-        m2 = Mao(Carta.get_cartas('5o6e10eJcAe'))
+        m2 = Mao(Carta.get_cartas('5e6c10cJpAc'))
         self.assertTrue(m1 == m2)
         self.assertTrue(m1 < m2)
         self.assertFalse(m2 < m1)
 
         m1 = Mao(Carta.get_cartas('5o6e10eJcAe'))
-        m2 = Mao(Carta.get_cartas('5o6e10eQcAe'))
+        m2 = Mao(Carta.get_cartas('5e6c10cQpAc'))
         self.assertTrue(m1 == m2)
         self.assertTrue(m1 < m2)
         self.assertFalse(m2 < m1)
+
+    def test_checa_a_sanidade_na_comparacao_de_maos_nao_pode_ter_cartas_repetidas(self):
+        m1 = Mao(Carta.get_cartas('5o6e10eJcAe'))
+        m2 = Mao(Carta.get_cartas('5o6e10eJcAe'))
+
+        with self.assertRaises(ValueError) as ctx:
+            self.assertTrue(m1 == m2)
+        self.assertEqual('Mãos com cartas repetidas.', str(ctx.exception))
+
+        with self.assertRaises(ValueError) as ctx:
+            self.assertFalse(m1 < m2)
+        self.assertEqual('Mãos com cartas repetidas.', str(ctx.exception))
 
 
 if __name__ == '__main__':

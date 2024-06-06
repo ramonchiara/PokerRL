@@ -166,7 +166,12 @@ class Mao:
         ])
 
     def __eq__(self, other):
+        self._checa_sanidade(other)
         return self.rank == other.rank
+
+    def _checa_sanidade(self, other):
+        if len(set(self.cartas + other.cartas)) != Mao.TAMANHO * 2:
+            raise ValueError('Mãos com cartas repetidas.')
 
     def __lt__(self, other):
         return self.rank < other.rank if self != other else self._compara_maior_carta(other)
