@@ -256,6 +256,7 @@ class MaoTest(unittest.TestCase):
             ['5p6p7p8p10p', 'flush'],
             ['2o3p4c5e6c', 'straight'],
             ['Ae2o3p4c5e', 'straight'],
+            ['10eJeQeKeAc', 'straight'],
             ['7o7e7c8o9e', 'trinca'],
             ['7o7e8c8o9e', 'dois_pares'],
             ['5p6p7p8p8c', 'um_par'],
