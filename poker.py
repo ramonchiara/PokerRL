@@ -111,6 +111,10 @@ class Mao:
             if getattr(self, 'is_' + tipo.replace(' ', '_'))():
                 return tipo
 
+    @property
+    def rank(self):
+        return Mao.TIPOS.index(self.tipo)
+
     def _is_sequencia(self):
         ranks = [c.indice_valor for c in self._cartas]
         straight = [(self._cartas[0].indice_valor - i) % len(Carta.VALORES) for i in range(Mao.TAMANHO)]

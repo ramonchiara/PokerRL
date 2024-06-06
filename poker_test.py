@@ -274,7 +274,7 @@ class MaoTest(unittest.TestCase):
     def test_quero_saber_os_tipos_de_mao(self):
         self.assertEqual(['maior carta', 'um par', 'dois pares', 'trinca', 'straight', 'flush', 'full house', 'quadra', 'straight flush'], Mao.TIPOS)
 
-    def test_quero_saber_o_tipo_de_mao(self):
+    def test_quero_saber_o_tipo_de_mao_e_respectivo_rank(self):
         testes = [
             ['5o6e10eJcAe', 'maior carta'],
             ['5p6p7p8p8c', 'um par'],
@@ -286,13 +286,13 @@ class MaoTest(unittest.TestCase):
             ['5o5e5c5p9o', 'quadra'],
             ['5p6p7p8p9p', 'straight flush']
         ]
-        for teste in testes:
+        for rank, teste in enumerate(testes):
             texto = teste[0]
-            expected = teste[1]
-            with self.subTest(f'test_{texto}_eh_tipo_{expected.replace(" ", "_")}'):
+            tipo = teste[1]
+            with self.subTest(f'test_{texto}_eh_tipo_{tipo.replace(" ", "_")}_com_rank_{rank}'):
                 mao = Mao(Carta.get_cartas(texto))
-                resultado = mao.tipo
-                self.assertEqual(expected, resultado)
+                self.assertEqual(tipo, mao.tipo)
+                self.assertEqual(rank, mao.rank)
 
 
 if __name__ == '__main__':
