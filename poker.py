@@ -86,7 +86,7 @@ class Baralho:
 
 class Mao:
     TAMANHO = 5
-    TIPOS = ['menor carta', 'um par', 'dois pares', 'trinca', 'straight', 'flush', 'full house', 'quadra', 'straight flush']
+    TIPOS = ['maior carta', 'um par', 'dois pares', 'trinca', 'straight', 'flush', 'full house', 'quadra', 'straight flush']
 
     def __init__(self, cartas):
         n = len(set(cartas))
@@ -104,6 +104,10 @@ class Mao:
     @property
     def cartas(self):
         return self._cartas
+
+    @property
+    def tipo(self):
+        return 'maior carta'
 
     def _is_sequencia(self):
         ranks = [c.indice_valor for c in self._cartas]

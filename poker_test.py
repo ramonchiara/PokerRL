@@ -272,7 +272,12 @@ class MaoTest(unittest.TestCase):
                     self.assertEqual(tipo == expected, resultado)
 
     def test_quero_saber_os_tipos_de_mao(self):
-        self.assertEqual(['menor carta', 'um par', 'dois pares', 'trinca', 'straight', 'flush', 'full house', 'quadra', 'straight flush'], Mao.TIPOS)
+        self.assertEqual(['maior carta', 'um par', 'dois pares', 'trinca', 'straight', 'flush', 'full house', 'quadra', 'straight flush'], Mao.TIPOS)
+
+    def test_quero_saber_o_tipo_de_mao(self):
+        mao = Mao(Carta.get_cartas('5o6e10eJcAe'))
+        tipo = 'maior carta'
+        self.assertEqual(tipo, mao.tipo)
 
 
 if __name__ == '__main__':
