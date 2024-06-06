@@ -325,16 +325,24 @@ class MaoTest(unittest.TestCase):
         self.assertFalse(m2 < m1)
 
     def test_checa_a_sanidade_na_comparacao_de_maos_nao_pode_ter_cartas_repetidas(self):
-        m1 = Mao(Carta.get_cartas('5o6e10eJcAe'))
-        m2 = Mao(Carta.get_cartas('5o6e10eJcAe'))
+        testes = [
+            ['5o6e10eJcAe', '5o6e10eJcAe'],
+            ['5o6e10eJcAe', '5e6c10cJpAe']
+        ]
+        for teste in testes:
+            texto1 = teste[0]
+            texto2 = teste[1]
+            with self.subTest(f'test_sanidade_{texto1}_com_{texto2}'):
+                m1 = Mao(Carta.get_cartas(texto1))
+                m2 = Mao(Carta.get_cartas(texto2))
 
-        with self.assertRaises(ValueError) as ctx:
-            self.assertTrue(m1 == m2)
-        self.assertEqual('Mãos com cartas repetidas.', str(ctx.exception))
+                with self.assertRaises(ValueError) as ctx:
+                    self.assertTrue(m1 == m2)
+                self.assertEqual('Mãos com cartas repetidas.', str(ctx.exception))
 
-        with self.assertRaises(ValueError) as ctx:
-            self.assertFalse(m1 < m2)
-        self.assertEqual('Mãos com cartas repetidas.', str(ctx.exception))
+                with self.assertRaises(ValueError) as ctx:
+                    self.assertFalse(m1 < m2)
+                self.assertEqual('Mãos com cartas repetidas.', str(ctx.exception))
 
 
 if __name__ == '__main__':
