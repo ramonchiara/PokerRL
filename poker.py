@@ -165,5 +165,13 @@ class Mao:
             self.is_straight_flush()
         ])
 
+    def __eq__(self, other):
+        return self.rank == other.rank
+
     def __lt__(self, other):
-        return self.rank < other.rank
+        return self.rank < other.rank if self != other else self._compara_maior_carta(other)
+
+    def _compara_maior_carta(self, other):
+        for i in range(Mao.TAMANHO):
+            if self.cartas[i].indice_valor != other.cartas[i].indice_valor:
+                return self.cartas[i].indice_valor < other.cartas[i].indice_valor
