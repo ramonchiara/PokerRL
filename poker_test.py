@@ -305,7 +305,7 @@ class MaoTest(unittest.TestCase):
                 self.assertTrue(m1 < m2)
                 self.assertFalse(m2 < m1)
 
-    def test_quero_poder_comparar_duas_maos_de_mesmo_tipo(self):
+    def test_quero_poder_comparar_duas_maos_de_mesmo_tipo_maior_carta(self):
         m1 = Mao(Carta.get_cartas('5o6e10eJcAe'))
         m2 = Mao(Carta.get_cartas('5o6e10eJcAe'))
         self.assertTrue(m1 == m2)
