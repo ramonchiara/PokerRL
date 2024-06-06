@@ -107,24 +107,9 @@ class Mao:
 
     @property
     def tipo(self):
-        if self.is_straight_flush():
-            return Mao.TIPOS[8]
-        elif self.is_quadra():
-            return Mao.TIPOS[7]
-        elif self.is_full_house():
-            return Mao.TIPOS[6]
-        elif self.is_flush():
-            return Mao.TIPOS[5]
-        elif self.is_straight():
-            return Mao.TIPOS[4]
-        elif self.is_trinca():
-            return Mao.TIPOS[3]
-        elif self.is_dois_pares():
-            return Mao.TIPOS[2]
-        elif self.is_um_par():
-            return Mao.TIPOS[1]
-        else:
-            return Mao.TIPOS[0]
+        for tipo in reversed(Mao.TIPOS):
+            if getattr(self, 'is_' + tipo.replace(' ', '_'))():
+                return tipo
 
     def _is_sequencia(self):
         ranks = [c.indice_valor for c in self._cartas]
