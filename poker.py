@@ -110,6 +110,7 @@ class Mao:
         for tipo in reversed(Mao.TIPOS):
             if getattr(self, 'is_' + tipo.replace(' ', '_'))():
                 return tipo
+        return None  # https://pylint.readthedocs.io/en/latest/user_guide/messages/refactor/inconsistent-return-statements.html
 
     @property
     def rank(self):
@@ -180,5 +181,4 @@ class Mao:
         for i in range(Mao.TAMANHO):
             if self.cartas[i].indice_valor != other.cartas[i].indice_valor:
                 return self.cartas[i].indice_valor < other.cartas[i].indice_valor
-        else:
-            return False
+        return False
