@@ -306,23 +306,21 @@ class MaoTest(unittest.TestCase):
                 self.assertFalse(m2 < m1)
 
     def test_quero_poder_comparar_duas_maos_de_mesmo_tipo_maior_carta(self):
-        m1 = Mao(Carta.get_cartas('5o6e10eJcAe'))
-        m2 = Mao(Carta.get_cartas('5e6c10cJpAc'))
-        self.assertTrue(m1 == m2)
-        self.assertFalse(m1 < m2)
-        self.assertFalse(m2 < m1)
-
-        m1 = Mao(Carta.get_cartas('5o6e10eJcKe'))
-        m2 = Mao(Carta.get_cartas('5e6c10cJpAc'))
-        self.assertTrue(m1 == m2)
-        self.assertTrue(m1 < m2)
-        self.assertFalse(m2 < m1)
-
-        m1 = Mao(Carta.get_cartas('5o6e10eJcAe'))
-        m2 = Mao(Carta.get_cartas('5e6c10cQpAc'))
-        self.assertTrue(m1 == m2)
-        self.assertTrue(m1 < m2)
-        self.assertFalse(m2 < m1)
+        testes = [
+            ['5o6e10eJcAe', '5e6c10cJpAc', False],
+            ['5o6e10eJcKe', '5e6c10cJpAc', True],
+            ['5o6e10eJcAe', '5e6c10cQpAc', True]
+        ]
+        for teste in testes:
+            texto1 = teste[0]
+            texto2 = teste[1]
+            is_menor = teste[2]
+            with self.subTest(f'test_{texto1}_{"eh_menor_que" if is_menor else "nao_eh_menor_que"}_{texto2}'):
+                m1 = Mao(Carta.get_cartas(texto1))
+                m2 = Mao(Carta.get_cartas(texto2))
+                self.assertTrue(m1 == m2)
+                self.assertEqual(is_menor, m1 < m2)
+                self.assertFalse(m2 < m1)
 
     def test_checa_a_sanidade_na_comparacao_de_maos_nao_pode_ter_cartas_repetidas(self):
         testes = [

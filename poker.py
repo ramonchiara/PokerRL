@@ -180,3 +180,5 @@ class Mao:
         for i in range(Mao.TAMANHO):
             if self.cartas[i].indice_valor != other.cartas[i].indice_valor:
                 return self.cartas[i].indice_valor < other.cartas[i].indice_valor
+        else:
+            return False
