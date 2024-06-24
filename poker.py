@@ -111,6 +111,11 @@ class Mao:
             # 321PP
             elif valores[3] == valores[4]:
                 self._cartas = self._cartas[3:5] + self._cartas[0:3]
+        elif self.is_dois_pares():
+            if valores[0] == valores[1] and valores[3] == valores[4]:
+                self._cartas = self._cartas[0:2] + self._cartas[3:5] + [self._cartas[2]]
+            elif valores[1] == valores[2] and valores[3] == valores[4]:
+                self._cartas = self._cartas[1:5] + [self._cartas[0]]
 
     @property
     def cartas(self):

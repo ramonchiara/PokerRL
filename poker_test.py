@@ -231,6 +231,10 @@ class MaoTest(unittest.TestCase):
             ['Ao9e9c8p7o', '9c9eAo8p7o'],  # um par 3PP21
             ['Ao9e8c8p7o', '8p8cAo9e7o'],  # um par 32PP1
             ['Ao9e8c7p7o', '7p7oAo9e8c'],  # um par 321PP
+            # casos PPQQx
+            ['AoAc9e9p7o', 'AcAo9p9e7o'],  # dois pares PPQQx
+            ['AoAc9e7p7o', 'AcAo7p7o9e'],  # dois pares PPxQQ
+            ['Ao9c9e7p7o', '9c9e7p7oAo'],  # dois pares xPPQQ
         ]
         for teste in testes:
             texto = teste[0]
