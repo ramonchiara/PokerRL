@@ -239,6 +239,10 @@ class MaoTest(unittest.TestCase):
             ['9p9c9e7o4p', '9p9c9e7o4p'],  # trinca TTT21
             ['9p7c7e7o4p', '7c7e7o9p4p'],  # trinca 2TTT1
             ['9p7c4e4o4p', '4p4e4o9p7c'],  # trinca 21TTT
+            # casos TTTPP
+            ['9o9e9c5p5o', '9c9e9o5p5o'],  # full house TTTPP
+            ['9o9e5c5p5o', '5p5c5o9e9o'],  # full house PPTTT
+
         ]
         for teste in testes:
             texto = teste[0]

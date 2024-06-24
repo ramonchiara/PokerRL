@@ -117,6 +117,9 @@ class Mao:
                 self._cartas = self._cartas[1:4] + [self._cartas[0]] + [self._cartas[4]]
             elif valores[2] == valores[3] and valores[3] == valores[4]:  # 21TTT
                 self._cartas = self._cartas[2:5] + self._cartas[0:2]
+        elif self.is_full_house():
+            if valores[2] == valores[3] and valores[3] == valores[4]:  # PPTTT
+                self._cartas = self._cartas[2:5] + self._cartas[0:2]
 
     @property
     def cartas(self):
