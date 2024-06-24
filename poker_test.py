@@ -305,11 +305,14 @@ class MaoTest(unittest.TestCase):
                 self.assertTrue(m1 < m2)
                 self.assertFalse(m2 < m1)
 
-    def test_quero_poder_comparar_duas_maos_de_mesmo_tipo_maior_carta(self):
+    def test_quero_poder_comparar_duas_maos_de_mesmo_tipo_maior_carta_m1_menor_m2(self):
         testes = [
-            ['5o6e10eJcAe', '5e6c10cJpAc', False],
-            ['5o6e10eJcKe', '5e6c10cJpAc', True],
-            ['5o6e10eJcAe', '5e6c10cQpAc', True]
+            ['5o6e10eJcAe', '5e6c10cJpAc', False],  # m1 == m2 (empate)
+            ['5o6e10eJcKe', '5e6c10cJpAc', True],  # m1 < m2 (1a maior carta)
+            ['5o6e10eJcAe', '5e6c10cQpAc', True],  # m1 < m2 (2a maior carta)
+            ['5o6e9eJcAe', '5e6c10cJpAc', True],  # m1 < m2 (3a maior carta)
+            ['5o6e10eJcAe', '5e7c10cJpAc', True],  # m1 < m2 (4a maior carta)
+            ['4o6e10eJcAe', '5e6c10cJpAc', True]  # m1 < m2 (5a maior carta - ou, menor carta)
         ]
         for teste in testes:
             texto1 = teste[0]
