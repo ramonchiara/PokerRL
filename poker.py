@@ -98,28 +98,24 @@ class Mao:
 
     def _ajusta_ordem(self):
         valores = [c.valor for c in self._cartas]
-        # wheel
-        if valores == ['A', 5, 4, 3, 2]:
+        if valores == ['A', 5, 4, 3, 2]:  # wheel
             self._cartas = self._cartas[1:] + [self._cartas[0]]
         elif self.is_um_par():
-            # 3PP21
-            if valores[1] == valores[2]:
+            if valores[1] == valores[2]:  # 3PP21
                 self._cartas = self._cartas[1:3] + [self._cartas[0]] + self._cartas[3:5]
-            # 32PP1
-            elif valores[2] == valores[3]:
+            elif valores[2] == valores[3]:  # 32PP1
                 self._cartas = self._cartas[2:4] + self._cartas[0:2] + [self._cartas[4]]
-            # 321PP
-            elif valores[3] == valores[4]:
+            elif valores[3] == valores[4]:  # 321PP
                 self._cartas = self._cartas[3:5] + self._cartas[0:3]
         elif self.is_dois_pares():
-            if valores[0] == valores[1] and valores[3] == valores[4]:
+            if valores[0] == valores[1] and valores[3] == valores[4]:  # PPxQQ
                 self._cartas = self._cartas[0:2] + self._cartas[3:5] + [self._cartas[2]]
-            elif valores[1] == valores[2] and valores[3] == valores[4]:
+            elif valores[1] == valores[2] and valores[3] == valores[4]:  # xPPQQ
                 self._cartas = self._cartas[1:5] + [self._cartas[0]]
         elif self.is_trinca():
-            if valores[1] == valores[2] and valores[2] == valores[3]:
+            if valores[1] == valores[2] and valores[2] == valores[3]:  # 2TTT1
                 self._cartas = self._cartas[1:4] + [self._cartas[0]] + [self._cartas[4]]
-            elif valores[2] == valores[3] and valores[3] == valores[4]:
+            elif valores[2] == valores[3] and valores[3] == valores[4]:  # 21TTT
                 self._cartas = self._cartas[2:5] + self._cartas[0:2]
 
     @property
