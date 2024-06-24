@@ -225,7 +225,12 @@ class MaoTest(unittest.TestCase):
             ['Ae2o3p4c5e', '5e4c3p2oAe'],  # wheel
             ['2o7o9oJoKo', 'KoJo9o7o2o'],  # flush
             ['5p6p7p8p9p', '9p8p7p6p5p'],  # straight fush
-            ['10eJeQeKeAe', 'AeKeQeJe10e']  # royal flush
+            ['10eJeQeKeAe', 'AeKeQeJe10e'],  # royal flush
+            # casos PP321
+            ['AoAc9e8p7o', 'AcAo9e8p7o'],  # um par PP321
+            ['Ao9e9c8p7o', '9c9eAo8p7o'],  # um par 3PP21
+            ['Ao9e8c8p7o', '8p8cAo9e7o'],  # um par 32PP1
+            ['Ao9e8c7p7o', '7p7oAo9e8c'],  # um par 321PP
         ]
         for teste in testes:
             texto = teste[0]
