@@ -339,6 +339,11 @@ class MaoTest(unittest.TestCase):
             ['3o5e7c9o9e', '3e5c8p9c9p', True],  # m1 < m2 (1a maior carta)
             ['3o5e7c9o9e', '3e6c7p9c9p', True],  # m1 < m2 (2a maior carta)
             ['3o5e7c9o9e', '4e5c7p9c9p', True],  # m1 < m2 (3a maior carta)
+            # dois pares
+            ['3o7e7c9o9e', '3e7o7p9c9p', False],  # m1 == m2 (empate)
+            ['3o7e7c8o8e', '3e7o7p9c9p', True],  # m1 < m2 (maior par)
+            ['3o7e7c9o9e', '3e8o8p9c9p', True],  # m1 < m2 (menor par)
+            ['3o7e7c9o9e', '4e7o7p9c9p', True],  # m1 < m2 (carta restante)
         ]
         for teste in testes:
             texto1 = teste[0]
