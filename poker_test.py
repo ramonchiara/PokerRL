@@ -326,53 +326,48 @@ class MaoTest(unittest.TestCase):
 
     def test_quero_poder_comparar_duas_maos_de_mesmo_tipo_para_fins_de_desempate(self):
         testes = [
-            # maior carta
-            ['5o6e10eJcAe', '5e6c10cJpAc', False],  # m1 == m2 (empate)
-            ['5o6e10eJcKe', '5e6c10cJpAc', True],  # m1 < m2 (1a maior carta)
-            ['5o6e10eJcAe', '5e6c10cQpAc', True],  # m1 < m2 (2a maior carta)
-            ['5o6e9eJcAe', '5e6c10cJpAc', True],  # m1 < m2 (3a maior carta)
-            ['5o6e10eJcAe', '5e7c10cJpAc', True],  # m1 < m2 (4a maior carta)
-            ['4o6e10eJcAe', '5e6c10cJpAc', True],  # m1 < m2 (5a maior carta - ou, menor carta)
-            # um par
-            ['3o5e7c9o9e', '3e5c7p9c9p', False],  # m1 == m2 (empate)
-            ['3o5e7c8o8e', '3e5c7p9c9p', True],  # m1 < m2 (par)
-            ['3o5e7c9o9e', '3e5c8p9c9p', True],  # m1 < m2 (1a maior carta)
-            ['3o5e7c9o9e', '3e6c7p9c9p', True],  # m1 < m2 (2a maior carta)
-            ['3o5e7c9o9e', '4e5c7p9c9p', True],  # m1 < m2 (3a maior carta)
-            # dois pares
-            ['3o7e7c9o9e', '3e7o7p9c9p', False],  # m1 == m2 (empate)
-            ['3o7e7c8o8e', '3e7o7p9c9p', True],  # m1 < m2 (maior par)
-            ['3o7e7c9o9e', '3e8o8p9c9p', True],  # m1 < m2 (menor par)
-            ['3o7e7c9o9e', '4e7o7p9c9p', True],  # m1 < m2 (carta restante)
-            # trinca
-            ['3o7e8c8o8e', '3e7o9o9c9p', True],  # m1 < m2 (maior trinca)
-            # straight
-            ['3o4e5c6o7e', '3e4o5o6c7p', False],  # m1 == m2 (empate)
-            ['3o4e5c6o7e', '4o5o6c7c8p', True],  # m1 < m2 (maior carta)
-            # flush
-            ['5o6o10oJoAo', '5c6c10cJcAc', False],  # m1 == m2 (empate)
-            ['5o6o10oJoKo', '5c6c10cJcAc', True],  # m1 < m2 (1a maior carta)
-            ['5o6o10oJoAo', '5c6c10cQcAc', True],  # m1 < m2 (2a maior carta)
-            ['5o6o9oJoAo', '5c6c10cJcAc', True],  # m1 < m2 (3a maior carta)
-            ['5o6o10oJoAo', '5c7c10cJcAc', True],  # m1 < m2 (4a maior carta)
-            ['4o6o10oJoAo', '5c6c10cJcAc', True],  # m1 < m2 (5a maior carta - ou, menor carta)
-            # full house
-            ['AoAe8c8o8e', '7e7o9o9c9p', True],  # m1 < m2 (maior trinca, mesmo com par maior)
-            # quadra
-            ['Ao8p8c8o8e', '7e9e9o9c9p', True],  # m1 < m2 (maior quadra, mesmo com kicker maior)
-            # straight flush
-            ['3o4o5o6o7o', '3c4c5c6c7c', False],  # m1 == m2 (empate)
-            ['3o4o5o6o7o', '4c5c6c7c8c', True],  # m1 < m2 (maior carta)
+            ['maior carta', '5o6e10eJcAe', '5e6c10cJpAc', True],
+            ['maior carta', '5o6e10eJcKe', '5e6c10cJpAc', False],  # maior carta vence
+            ['maior carta', '5o6e10eJcAe', '5e6c10cQpAc', False],  # 2a maior carta vence
+            ['maior carta', '5o6e9eJcAe', '5e6c10cJpAc', False],  # 3a maior carta vence
+            ['maior carta', '5o6e10eJcAe', '5e7c10cJpAc', False],  # 4a maior carta vence
+            ['maior carta', '4o6e10eJcAe', '5e6c10cJpAc', False],  # 5a maior carta vence
+            ['um par', '3o5e7c9o9e', '3e5c7p9c9p', True],
+            ['um par', '3o5e7c8o8e', '3e5c7p9c9p', False],  # maior par vence
+            ['um par', '3o5e7c9o9e', '3e5c8p9c9p', False],  # maior carta vence
+            ['um par', '3o5e7c9o9e', '3e6c7p9c9p', False],  # 2a maior carta vence
+            ['um par', '3o5e7c9o9e', '4e5c7p9c9p', False],  # 3a maior carta vence
+            ['dois pares', '3o7e7c9o9e', '3e7o7p9c9p', True],
+            ['dois pares', '3o7e7c8o8e', '3e7o7p9c9p', False],  # maior par vence
+            ['dois pares', '3o7e7c9o9e', '3e8o8p9c9p', False],  # 2o maior par vence
+            ['dois pares', '3o7e7c9o9e', '4e7o7p9c9p', False],  # maior carta vence
+            ['trinca', '3o7e8c8o8e', '3e7o9o9c9p', False],  # maior trinca vence
+            ['straight', '3o4e5c6o7e', '3e4o5o6c7p', True],
+            ['straight', '3o4e5c6o7e', '4o5o6c7c8p', False],  # maior carta vence
+            ['flush', '5o6o10oJoAo', '5c6c10cJcAc', True],
+            ['flush', '5o6o10oJoKo', '5c6c10cJcAc', False],  # maior carta vence
+            ['flush', '5o6o10oJoAo', '5c6c10cQcAc', False],  # 2a maior carta vence
+            ['flush', '5o6o9oJoAo', '5c6c10cJcAc', False],  # 3a maior carta vence
+            ['flush', '5o6o10oJoAo', '5c7c10cJcAc', False],  # 4a maior carta vence
+            ['flush', '4o6o10oJoAo', '5c6c10cJcAc', False],  # 5a maior carta vence
+            ['full house', 'AoAe8c8o8e', '7e7o9o9c9p', False],  # maior trinca vence
+            ['quadra', 'Ao8p8c8o8e', '7e9e9o9c9p', False],  # maior quadra vence
+            ['straight flush', '3o4o5o6o7o', '3c4c5c6c7c', True],
+            ['straight flush', '3o4o5o6o7o', '4c5c6c7c8c', False]  # maior carta vence
         ]
         for teste in testes:
-            texto1 = teste[0]
-            texto2 = teste[1]
-            is_menor = teste[2]
-            m1 = Mao(Carta.get_cartas(texto1))
-            m2 = Mao(Carta.get_cartas(texto2))
-            with self.subTest(f'test_{texto1}_{m1.tipo.replace(" ", "_")}_{"eh_menor_que" if is_menor else "nao_eh_menor_que"}_{texto2}_{m2.tipo.replace(" ", "_")}'):
-                self.assertTrue(m1 == m2)  # confirma que são o mesmo tipo de mão (um par, dois pares, ...)
-                self.assertEqual(is_menor, m1 < m2)
+            tipo = teste[0]
+            texto1 = teste[1]
+            texto2 = teste[2]
+            empate = teste[3]
+            with self.subTest(f'test_{tipo.replace(" ", "_")}_{texto1}_{"empata_com" if empate else "eh_menor_que"}_{texto2}'):
+                m1 = Mao(Carta.get_cartas(texto1))
+                m2 = Mao(Carta.get_cartas(texto2))
+                self.assertEqual(tipo, m1.tipo)
+                self.assertEqual(tipo, m2.tipo)
+                mesmo_tipo_de_mao = m1 == m2
+                self.assertTrue(mesmo_tipo_de_mao)
+                self.assertEqual(not empate, m1 < m2)
                 self.assertFalse(m2 < m1)
 
     def test_checa_a_sanidade_na_comparacao_de_maos_nao_pode_ter_cartas_repetidas(self):
