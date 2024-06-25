@@ -346,14 +346,24 @@ class MaoTest(unittest.TestCase):
             ['3o7e7c9o9e', '4e7o7p9c9p', True],  # m1 < m2 (carta restante)
             # trinca
             ['3o7e8c8o8e', '3e7o9o9c9p', True],  # m1 < m2 (maior trinca)
+            # straight
+            ['3o4e5c6o7e', '3e4o5o6c7p', False],  # m1 == m2 (empate)
+            ['3o4e5c6o7e', '4o5o6c7c8p', True],  # m1 < m2 (maior carta)
+            # flush
+            ['5o6o10oJoAo', '5c6c10cJcAc', False],  # m1 == m2 (empate)
+            ['5o6o10oJoKo', '5c6c10cJcAc', True],  # m1 < m2 (1a maior carta)
+            ['5o6o10oJoAo', '5c6c10cQcAc', True],  # m1 < m2 (2a maior carta)
+            ['5o6o9oJoAo', '5c6c10cJcAc', True],  # m1 < m2 (3a maior carta)
+            ['5o6o10oJoAo', '5c7c10cJcAc', True],  # m1 < m2 (4a maior carta)
+            ['4o6o10oJoAo', '5c6c10cJcAc', True],  # m1 < m2 (5a maior carta - ou, menor carta)
         ]
         for teste in testes:
             texto1 = teste[0]
             texto2 = teste[1]
             is_menor = teste[2]
-            with self.subTest(f'test_{texto1}_{"eh_menor_que" if is_menor else "nao_eh_menor_que"}_{texto2}'):
-                m1 = Mao(Carta.get_cartas(texto1))
-                m2 = Mao(Carta.get_cartas(texto2))
+            m1 = Mao(Carta.get_cartas(texto1))
+            m2 = Mao(Carta.get_cartas(texto2))
+            with self.subTest(f'test_{texto1}_{m1.tipo.replace(" ", "_")}_{"eh_menor_que" if is_menor else "nao_eh_menor_que"}_{texto2}_{m2.tipo.replace(" ", "_")}'):
                 self.assertTrue(m1 == m2)  # confirma que são o mesmo tipo de mão (um par, dois pares, ...)
                 self.assertEqual(is_menor, m1 < m2)
                 self.assertFalse(m2 < m1)
