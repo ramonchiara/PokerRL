@@ -344,6 +344,8 @@ class MaoTest(unittest.TestCase):
             ['3o7e7c8o8e', '3e7o7p9c9p', True],  # m1 < m2 (maior par)
             ['3o7e7c9o9e', '3e8o8p9c9p', True],  # m1 < m2 (menor par)
             ['3o7e7c9o9e', '4e7o7p9c9p', True],  # m1 < m2 (carta restante)
+            # trinca
+            ['3o7e8c8o8e', '3e7o9o9c9p', True],  # m1 < m2 (maior trinca)
         ]
         for teste in testes:
             texto1 = teste[0]
