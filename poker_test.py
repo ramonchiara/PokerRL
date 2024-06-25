@@ -242,7 +242,9 @@ class MaoTest(unittest.TestCase):
             # casos TTTPP
             ['9o9e9c5p5o', '9c9e9o5p5o'],  # full house TTTPP
             ['9o9e5c5p5o', '5p5c5o9e9o'],  # full house PPTTT
-
+            # casos QQQQx
+            ['9o9e9c9p7o', '9p9c9e9o7o'],  # quadra QQQQx
+            ['9o7o7e7c7p', '7p7c7e7o9o']  # quadra xQQQQ
         ]
         for teste in testes:
             texto = teste[0]

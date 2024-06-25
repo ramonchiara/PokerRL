@@ -120,6 +120,9 @@ class Mao:
         elif self.is_full_house():
             if valores[2] == valores[3] and valores[3] == valores[4]:  # PPTTT
                 self._cartas = self._cartas[2:5] + self._cartas[0:2]
+        elif self.is_quadra():
+            if valores[1] == valores[2] and valores[2] == valores[3] and valores[3] == valores[4]:  # xQQQQ
+                self._cartas = self._cartas[1:5] + [self._cartas[0]]
 
     @property
     def cartas(self):
