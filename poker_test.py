@@ -324,14 +324,20 @@ class MaoTest(unittest.TestCase):
                 self.assertTrue(m1 < m2)
                 self.assertFalse(m2 < m1)
 
-    def test_quero_poder_comparar_duas_maos_de_mesmo_tipo_maior_carta_m1_menor_m2(self):
+    def test_quero_poder_comparar_duas_maos_de_mesmo_tipo_para_fins_de_desempate(self):
         testes = [
+            # maior carta
             ['5o6e10eJcAe', '5e6c10cJpAc', False],  # m1 == m2 (empate)
             ['5o6e10eJcKe', '5e6c10cJpAc', True],  # m1 < m2 (1a maior carta)
             ['5o6e10eJcAe', '5e6c10cQpAc', True],  # m1 < m2 (2a maior carta)
             ['5o6e9eJcAe', '5e6c10cJpAc', True],  # m1 < m2 (3a maior carta)
             ['5o6e10eJcAe', '5e7c10cJpAc', True],  # m1 < m2 (4a maior carta)
-            ['4o6e10eJcAe', '5e6c10cJpAc', True]  # m1 < m2 (5a maior carta - ou, menor carta)
+            ['4o6e10eJcAe', '5e6c10cJpAc', True],  # m1 < m2 (5a maior carta - ou, menor carta)
+            # um par
+            ['3o5e7c9o9e', '3e5c7p9c9p', False],  # m1 == m2 (empate)
+            ['3o5e7c9o9e', '3e5c8p9c9p', True],  # m1 < m2 (1a maior carta)
+            ['3o5e7c9o9e', '3e6c7p9c9p', True],  # m1 < m2 (2a maior carta)
+            ['3o5e7c9o9e', '4e5c7p9c9p', True],  # m1 < m2 (3a maior carta)
         ]
         for teste in testes:
             texto1 = teste[0]
@@ -340,7 +346,7 @@ class MaoTest(unittest.TestCase):
             with self.subTest(f'test_{texto1}_{"eh_menor_que" if is_menor else "nao_eh_menor_que"}_{texto2}'):
                 m1 = Mao(Carta.get_cartas(texto1))
                 m2 = Mao(Carta.get_cartas(texto2))
-                self.assertTrue(m1 == m2)
+                self.assertTrue(m1 == m2)  # mesmo tipo de mão (um par, dois pares, ...)
                 self.assertEqual(is_menor, m1 < m2)
                 self.assertFalse(m2 < m1)
 
