@@ -98,31 +98,50 @@ class Mao:
 
     def _ajusta_ordem(self):
         valores = [c.valor for c in self._cartas]
-        if valores == ['A', 5, 4, 3, 2]:  # wheel
-            self._cartas = self._cartas[1:] + [self._cartas[0]]
+        is_wheel = valores == ['A', 5, 4, 3, 2]
+        if is_wheel:
+            self._ajusta_ordem_wheel()
         elif self.is_um_par():
-            if valores[1] == valores[2]:  # 3PP21
-                self._cartas = self._cartas[1:3] + [self._cartas[0]] + self._cartas[3:5]
-            elif valores[2] == valores[3]:  # 32PP1
-                self._cartas = self._cartas[2:4] + self._cartas[0:2] + [self._cartas[4]]
-            elif valores[3] == valores[4]:  # 321PP
-                self._cartas = self._cartas[3:5] + self._cartas[0:3]
+            self._ajusta_ordem_um_par(valores)
         elif self.is_dois_pares():
-            if valores[0] == valores[1] and valores[3] == valores[4]:  # PPxQQ
-                self._cartas = self._cartas[0:2] + self._cartas[3:5] + [self._cartas[2]]
-            elif valores[1] == valores[2] and valores[3] == valores[4]:  # xPPQQ
-                self._cartas = self._cartas[1:5] + [self._cartas[0]]
+            self._ajusta_ordem_dois_pares(valores)
         elif self.is_trinca():
-            if valores[1] == valores[2] and valores[2] == valores[3]:  # 2TTT1
-                self._cartas = self._cartas[1:4] + [self._cartas[0]] + [self._cartas[4]]
-            elif valores[2] == valores[3] and valores[3] == valores[4]:  # 21TTT
-                self._cartas = self._cartas[2:5] + self._cartas[0:2]
+            self._ajusta_ordem_trinca(valores)
         elif self.is_full_house():
-            if valores[2] == valores[3] and valores[3] == valores[4]:  # PPTTT
-                self._cartas = self._cartas[2:5] + self._cartas[0:2]
+            self._ajusta_ordem_full_house(valores)
         elif self.is_quadra():
-            if valores[1] == valores[2] and valores[2] == valores[3] and valores[3] == valores[4]:  # xQQQQ
-                self._cartas = self._cartas[1:5] + [self._cartas[0]]
+            self._ajusta_ordem_quadra(valores)
+
+    def _ajusta_ordem_wheel(self):
+        self._cartas = self._cartas[1:] + [self._cartas[0]]
+
+    def _ajusta_ordem_um_par(self, valores):
+        if valores[1] == valores[2]:  # 3PP21
+            self._cartas = self._cartas[1:3] + [self._cartas[0]] + self._cartas[3:5]
+        elif valores[2] == valores[3]:  # 32PP1
+            self._cartas = self._cartas[2:4] + self._cartas[0:2] + [self._cartas[4]]
+        elif valores[3] == valores[4]:  # 321PP
+            self._cartas = self._cartas[3:5] + self._cartas[0:3]
+
+    def _ajusta_ordem_dois_pares(self, valores):
+        if valores[0] == valores[1] and valores[3] == valores[4]:  # PPxQQ
+            self._cartas = self._cartas[0:2] + self._cartas[3:5] + [self._cartas[2]]
+        elif valores[1] == valores[2] and valores[3] == valores[4]:  # xPPQQ
+            self._cartas = self._cartas[1:5] + [self._cartas[0]]
+
+    def _ajusta_ordem_trinca(self, valores):
+        if valores[1] == valores[2] and valores[2] == valores[3]:  # 2TTT1
+            self._cartas = self._cartas[1:4] + [self._cartas[0]] + [self._cartas[4]]
+        elif valores[2] == valores[3] and valores[3] == valores[4]:  # 21TTT
+            self._cartas = self._cartas[2:5] + self._cartas[0:2]
+
+    def _ajusta_ordem_full_house(self, valores):
+        if valores[2] == valores[3] and valores[3] == valores[4]:  # PPTTT
+            self._cartas = self._cartas[2:5] + self._cartas[0:2]
+
+    def _ajusta_ordem_quadra(self, valores):
+        if valores[1] == valores[2] and valores[2] == valores[3] and valores[3] == valores[4]:  # xQQQQ
+            self._cartas = self._cartas[1:5] + [self._cartas[0]]
 
     @property
     def cartas(self):
