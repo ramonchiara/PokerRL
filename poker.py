@@ -47,6 +47,9 @@ class Carta:
     def __repr__(self):
         return f'Carta({repr(self._valor)}, {repr(self._naipe)})'
 
+    def __str__(self):
+        return f'{self._valor}{self._naipe[0]}'
+
     def __eq__(self, other):
         return self._valor == other.valor and self._naipe == other.naipe
 
@@ -208,6 +211,9 @@ class Mao:
             self.is_straight_flush()
         ])
 
+    def __str__(self):
+        return ''.join([str(c) for c in self.cartas])
+
     def __eq__(self, other):
         self._checa_sanidade(other)
         return self.rank == other.rank
@@ -224,3 +230,15 @@ class Mao:
             if self.cartas[i].indice_valor != other.cartas[i].indice_valor:
                 return self.cartas[i].indice_valor < other.cartas[i].indice_valor
         return False
+
+
+if __name__ == '__main__':
+    baralho = Baralho()
+    baralho.embaralhar()
+    mao1 = Mao(baralho.distribuir(5))
+    mao2 = Mao(baralho.distribuir(5))
+    ganhou = 1 if mao2 < mao1 else 2 if mao1 < mao2 else 0
+    print(f'Mão 1 = {mao1} ({mao1.tipo}) {"*** VENCEU POR POUCO ***" if mao1 == mao2 and ganhou == 1 else "*** VENCEDOR ***" if mao1 != mao2 and ganhou == 1 else ""}')
+    print(f'Mão 2 = {mao2} ({mao2.tipo}) {"*** VENCEU POR POUCO ***" if mao1 == mao2 and ganhou == 2 else "*** VENCEDOR ***" if mao1 != mao2 and ganhou == 2 else ""}')
+    if ganhou == 0:
+        print('*** EMPATE ***')

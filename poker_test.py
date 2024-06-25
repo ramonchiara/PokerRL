@@ -56,6 +56,10 @@ class CartaTest(unittest.TestCase):
         c = Carta(2, 'ouros')
         self.assertEqual("Carta(2, 'ouros')", repr(c))
 
+    def test_str(self):
+        c = Carta(2, 'ouros')
+        self.assertEqual("2o", str(c))
+
     def test_quero_poder_criar_uma_lista_de_cartas_a_partir_de_um_texto(self):
         testes = [
             ['2o', [Carta(2, 'ouros')]],
@@ -389,6 +393,11 @@ class MaoTest(unittest.TestCase):
                 with self.assertRaises(ValueError) as ctx:
                     self.assertFalse(m1 < m2)
                 self.assertEqual('Mãos com cartas repetidas.', str(ctx.exception))
+
+    def test_str(self):
+        texto = 'AeJc10e6e5o'
+        mao = Mao(Carta.get_cartas(texto))
+        self.assertEqual(texto, str(mao))
 
 
 if __name__ == '__main__':
