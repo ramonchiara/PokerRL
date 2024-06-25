@@ -358,6 +358,11 @@ class MaoTest(unittest.TestCase):
             ['4o6o10oJoAo', '5c6c10cJcAc', True],  # m1 < m2 (5a maior carta - ou, menor carta)
             # full house
             ['AoAe8c8o8e', '7e7o9o9c9p', True],  # m1 < m2 (maior trinca, mesmo com par maior)
+            # quadra
+            ['Ao8p8c8o8e', '7e9e9o9c9p', True],  # m1 < m2 (maior quadra, mesmo com kicker maior)
+            # straight flush
+            ['3o4o5o6o7o', '3c4c5c6c7c', False],  # m1 == m2 (empate)
+            ['3o4o5o6o7o', '4c5c6c7c8c', True],  # m1 < m2 (maior carta)
         ]
         for teste in testes:
             texto1 = teste[0]
