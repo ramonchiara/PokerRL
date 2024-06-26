@@ -240,8 +240,29 @@ class Mao:
 if __name__ == '__main__':
     baralho = Baralho()
     baralho.embaralhar()
+
     mao1 = Mao(baralho.distribuir(5))
     mao2 = Mao(baralho.distribuir(5))
+
+    trocas1 = random.randrange(2 ** Mao.TAMANHO)
+    trocas2 = random.randrange(2 ** Mao.TAMANHO)
+
+    quais1 = bin(trocas1)[2:].zfill(Mao.TAMANHO)
+    quais2 = bin(trocas2)[2:].zfill(Mao.TAMANHO)
+
+    n1 = sum(int(b) for b in quais1)
+    n2 = sum(int(b) for b in quais2)
+
+    novas_cartas1 = baralho.distribuir(n1)
+    novas_cartas2 = baralho.distribuir(n2)
+
+    print(f'Mão 1 = {mao1} ({mao1.tipo}) - vou trocar {quais1} por {"".join([str(c) for c in novas_cartas1])}')
+    print(f'Mão 2 = {mao2} ({mao2.tipo}) - vou trocar {quais2} por {"".join([str(c) for c in novas_cartas2])}')
+
+    mao1.trocar(quais1, novas_cartas1)
+    mao2.trocar(quais2, novas_cartas2)
+    print('--- TROCAS EFETUADAS ---')
+
     ganhou = 1 if mao2 < mao1 else 2 if mao1 < mao2 else 0
     print(f'Mão 1 = {mao1} ({mao1.tipo}) {"*** VENCEU POR POUCO ***" if mao1 == mao2 and ganhou == 1 else "*** VENCEDOR ***" if mao1 != mao2 and ganhou == 1 else ""}')
     print(f'Mão 2 = {mao2} ({mao2.tipo}) {"*** VENCEU POR POUCO ***" if mao1 == mao2 and ganhou == 2 else "*** VENCEDOR ***" if mao1 != mao2 and ganhou == 2 else ""}')
