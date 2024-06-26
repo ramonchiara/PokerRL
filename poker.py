@@ -182,7 +182,7 @@ class Mao:
         valores = [c.valor for c in self._cartas]
         quantidades = Counter(valores)
         repetidas = Counter(quantidades.values())
-        return tuple(repetidas.get(n, 0) for n in range(1, 5))
+        return tuple(repetidas[n] for n in range(1, Mao.TAMANHO))
 
     def is_quadra(self):
         return self._get_repeticoes() == (1, 0, 0, 1)
@@ -220,10 +220,10 @@ class Mao:
         return ''.join([str(c) for c in self.cartas])
 
     def __eq__(self, other):
-        self._checa_sanidade(other)
+        self._checa_sanidade_eq(other)
         return self.rank == other.rank
 
-    def _checa_sanidade(self, other):
+    def _checa_sanidade_eq(self, other):
         if len(set(self.cartas + other.cartas)) != Mao.TAMANHO * 2:
             raise ValueError('Mãos com cartas repetidas.')
 
