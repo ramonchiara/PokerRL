@@ -95,11 +95,11 @@ class Mao:
         n = len(set(cartas))
         if n != Mao.TAMANHO:
             raise ValueError(f'Quantidade inválida de cartas: {n}.')
-        self._cartas = sorted(cartas)
-        self._cartas.reverse()
-        self._ajusta_ordem()
+        self._cartas = cartas
+        self._ordena_cartas()
 
-    def _ajusta_ordem(self):
+    def _ordena_cartas(self):
+        self._cartas = sorted(self._cartas, reverse=True)
         valores = [c.valor for c in self._cartas]
         is_wheel = valores == ['A', 5, 4, 3, 2]
         if is_wheel:
@@ -210,6 +210,11 @@ class Mao:
             self.is_quadra(),
             self.is_straight_flush()
         ])
+
+    def trocar(self, quais, novas_cartas):
+        self._cartas = [carta for carta, troca in zip(self._cartas, quais) if troca == '0']
+        self._cartas += novas_cartas
+        self._ordena_cartas()
 
     def __str__(self):
         return ''.join([str(c) for c in self.cartas])

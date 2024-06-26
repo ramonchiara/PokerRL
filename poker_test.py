@@ -399,6 +399,42 @@ class MaoTest(unittest.TestCase):
         mao = Mao(Carta.get_cartas(texto))
         self.assertEqual(texto, str(mao))
 
+    def test_quero_poder_trocar_cartas_de_uma_mao(self):
+        cartas_iniciais = '6o5o4o3o2o'
+        testes = [
+            ['00000', '', cartas_iniciais],
+            ['00001', 'Kp', 'Kp6o5o4o3o'],
+            ['00010', 'Kp', 'Kp6o5o4o2o'],
+            ['00100', 'Kp', 'Kp6o5o3o2o'],
+            ['01000', 'Kp', 'Kp6o4o3o2o'],
+            ['10000', 'Kp', 'Kp5o4o3o2o'],
+            ['00011', 'KpQp', 'KpQp6o5o4o'],
+            ['00110', 'KpQp', 'KpQp6o5o2o'],
+            ['01100', 'KpQp', 'KpQp6o3o2o'],
+            ['11000', 'KpQp', 'KpQp4o3o2o'],
+            ['00111', 'KpQpJp', 'KpQpJp6o5o'],
+            ['01110', 'KpQpJp', 'KpQpJp6o2o'],
+            ['11100', 'KpQpJp', 'KpQpJp3o2o'],
+            ['01111', 'KpQpJp9p', 'KpQpJp9p6o'],
+            ['11110', 'KpQpJp9p', 'KpQpJp9p2o'],
+            ['11111', 'KpQpJp9p8p', 'KpQpJp9p8p'],
+            ['00101', 'KpQp', 'KpQp6o5o3o'],
+            ['01010', 'KpQp', 'KpQp6o4o2o'],
+            ['10100', 'KpQp', 'KpQp5o3o2o'],
+            ['10101', 'KpQpJp', 'KpQpJp5o3o'],
+            ['11101', 'KpQpJp9p', 'KpQpJp9p3o'],
+            ['11011', 'KpQpJp9p', 'KpQpJp9p4o'],
+            ['10111', 'KpQpJp9p', 'KpQpJp9p5o']
+        ]
+        for teste in testes:
+            quais = teste[0]
+            novas_cartas = teste[1]
+            expected = teste[2]
+            with self.subTest(f'test_{cartas_iniciais}_ao_trocar_{quais}_por_{novas_cartas if novas_cartas else "nada"}_deve_mudar_para_{expected}'):
+                mao = Mao(Carta.get_cartas(cartas_iniciais))
+                mao.trocar(quais, Carta.get_cartas(novas_cartas))
+                self.assertEqual(expected, str(mao))
+
 
 if __name__ == '__main__':
     unittest.main()
