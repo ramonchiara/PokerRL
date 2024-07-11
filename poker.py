@@ -241,8 +241,8 @@ if __name__ == '__main__':
     baralho = Baralho()
     baralho.embaralhar()
 
-    mao1 = Mao(baralho.distribuir(5))
-    mao2 = Mao(baralho.distribuir(5))
+    mao1 = Mao(baralho.distribuir(Mao.TAMANHO))
+    mao2 = Mao(baralho.distribuir(Mao.TAMANHO))
 
     trocas1 = random.randrange(2 ** Mao.TAMANHO)
     trocas2 = random.randrange(2 ** Mao.TAMANHO)
