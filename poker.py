@@ -212,9 +212,21 @@ class Mao:
         ])
 
     def trocar(self, quais, novas_cartas):
+        if len(quais) != Mao.TAMANHO:
+            raise ValueError(f'Quantidade inválida de quais cartas a trocar: {len(quais)}.')
+        if len(novas_cartas) != Mao.quantos_uns(quais):
+            raise ValueError(f'Quantidade inválida de novas cartas: {len(novas_cartas)}.')
         self._cartas = [carta for carta, troca in zip(self._cartas, quais) if troca == '0']
         self._cartas += novas_cartas
         self._ordena_cartas()
+
+    @staticmethod
+    def quantos_uns(quais):
+        return sum(int(b) for b in quais)
+
+    @staticmethod
+    def trocas_to_bin(trocas):
+        return bin(trocas)[2:].zfill(Mao.TAMANHO)
 
     def __str__(self):
         return ''.join([str(c) for c in self.cartas])

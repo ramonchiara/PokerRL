@@ -434,6 +434,27 @@ class MaoTest(unittest.TestCase):
                 mao = Mao(Carta.get_cartas(cartas_iniciais))
                 mao.trocar(quais, Carta.get_cartas(novas_cartas))
                 self.assertEqual(expected, str(mao))
+                self.assertEqual(Mao.TAMANHO, len(mao.cartas))  # sanity_check: conjunto (set) final de cartas deve ter tamanho Mao.TAMANHO
+
+    def test_checa_a_sanidade_na_troca_de_cartas(self):
+        cartas_iniciais = '6o5o4o3o2o'
+        mao = Mao(Carta.get_cartas(cartas_iniciais))
+
+        # quais deve ter o tamanho de Mao.TAMANHO
+        novas_cartas = ''
+        for quais in ['0000', '000000']:
+            with self.subTest(f'test_trocando_{quais}_em_uma_mao_de_{Mao.TAMANHO}_deve_gerar_excecao'):
+                with self.assertRaises(ValueError) as ctx:
+                    mao.trocar(quais, Carta.get_cartas(novas_cartas))
+                self.assertEqual(f'Quantidade inválida de quais cartas a trocar: {len(quais)}.', str(ctx.exception))
+
+        # novas_cartas deve ter o tamanho da quantidade de cartas a serem trocadas
+        quais = '01010'  # precisa trocar 2
+        for novas_cartas in ['Kp', 'KpQpJp']:
+            with self.subTest(f'test_trocando_{quais}_por_{novas_cartas}_deve_gerar_excecao'):
+                with self.assertRaises(ValueError) as ctx:
+                    mao.trocar(quais, Carta.get_cartas(novas_cartas))
+                self.assertEqual(f'Quantidade inválida de novas cartas: {len(Carta.get_cartas(novas_cartas))}.', str(ctx.exception))
 
 
 if __name__ == '__main__':
