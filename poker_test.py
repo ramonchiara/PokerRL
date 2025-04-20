@@ -448,6 +448,12 @@ class MaoTest(unittest.TestCase):
                     mao.trocar(quais, Carta.get_cartas(novas_cartas))
                 self.assertEqual(f'Quantidade inválida de quais cartas a trocar: {len(quais)}.', str(ctx.exception))
 
+        # quais será um sorteio de 0 a 2^Mao.TAMANHO-1, ou seja, 31 - ao transformar em binário, deve ter tamanho Mao.TAMANHO
+        for trocas in range(2 ** Mao.TAMANHO):
+            with self.subTest(f'test_ao_transformar_{trocas}_em_binario_deve_ter_tamanho_{Mao.TAMANHO}'):
+                quais = Mao.trocas_to_bin(trocas)
+                self.assertEqual(Mao.TAMANHO, len(quais))
+
         # novas_cartas deve ter o tamanho da quantidade de cartas a serem trocadas
         quais = '01010'  # precisa trocar 2
         for novas_cartas in ['Kp', 'KpQpJp']:
