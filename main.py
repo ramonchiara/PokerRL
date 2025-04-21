@@ -1,4 +1,7 @@
-from poker import *
+import random
+
+from poker.baralho import Baralho
+from poker.mao import Mao
 
 if __name__ == '__main__':
     baralho = Baralho()
