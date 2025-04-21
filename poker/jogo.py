@@ -48,9 +48,24 @@ class Jogo:
             print(f'* {jogador.nome} tem {jogador.cartas}.')
 
     def _mostrar_ganhadores(self):
-        print('== Ganhadores ==')
         ganhadores = self._determinar_ganhadores()
-        print(ganhadores)
+        if len(ganhadores) == 1:
+            print('== Ganhador ==')
+            print(f'* {ganhadores[0].nome} ganhou com {ganhadores[0].mao.tipo}.')
+        else:
+            print('== Empate ==')
+            print(f'* Houve empate entre: {", ".join([ganhador.nome for ganhador in ganhadores])} com {ganhadores[0].mao.tipo}.')
 
     def _determinar_ganhadores(self):
-        return []
+        melhores_maos = []
+        melhor_mao = None
+
+        for jogador in self.jogadores:
+            mao = jogador.mao
+            if melhor_mao is None or mao > melhor_mao:
+                melhor_mao = mao
+                melhores_maos = [jogador]
+            elif mao == melhor_mao:
+                melhores_maos.append(jogador)
+
+        return melhores_maos
