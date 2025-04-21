@@ -132,9 +132,12 @@ class Mao:
             raise ValueError(f'Quantidade inválida de quais cartas a trocar: {len(quais)}.')
         if len(novas_cartas) != Mao.quantos_uns(quais):
             raise ValueError(f'Quantidade inválida de novas cartas: {len(novas_cartas)}.')
-        self._cartas = [carta for carta, troca in zip(self._cartas, quais) if troca == '0']
+        self._cartas = self.cartas_from_indices(quais)
         self._cartas += novas_cartas
         self._ordena_cartas()
+
+    def cartas_from_indices(self, quais):
+        return [carta for carta, troca in zip(self._cartas, quais) if troca == '0']
 
     @staticmethod
     def quantos_uns(quais):
