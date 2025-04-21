@@ -9,21 +9,21 @@ class MaoTest(unittest.TestCase):
 
     def test_quero_poder_criar_uma_mao_de_poker(self):
         baralho = Baralho()
-        cartas = baralho.distribuir(5)
+        cartas = baralho.distribuir(Mao.TAMANHO)
         mao = Mao(cartas)
         self.assertEqual(cartas, mao.cartas)
 
     def test_deve_gerar_excecao_se_mao_com_menos_de_5_cartas(self):
         with self.assertRaises(ValueError) as ctx:
             baralho = Baralho()
-            cartas = baralho.distribuir(4)
+            cartas = baralho.distribuir(Mao.TAMANHO - 1)
             Mao(cartas)
         self.assertEqual('Quantidade inválida de cartas: 4.', str(ctx.exception))
 
     def test_deve_gerar_excecao_se_mao_com_mais_de_5_cartas(self):
         with self.assertRaises(ValueError) as ctx:
             baralho = Baralho()
-            cartas = baralho.distribuir(6)
+            cartas = baralho.distribuir(Mao.TAMANHO + 1)
             Mao(cartas)
         self.assertEqual('Quantidade inválida de cartas: 6.', str(ctx.exception))
 

@@ -79,7 +79,7 @@ class Mao:
 
     def _is_sequencia(self):
         ranks = [c.indice_valor for c in self._cartas]
-        straight = [(self._cartas[0].indice_valor - i) % len(Carta.VALORES) for i in range(Mao.TAMANHO)]
+        straight = [(self._cartas[0].indice_valor - i) % len(Carta.VALORES) for i in range(len(self._cartas))]
         return ranks == straight
 
     def _is_mesmo_naipe(self):
@@ -145,7 +145,7 @@ class Mao:
         return bin(trocas)[2:].zfill(Mao.TAMANHO)
 
     def __str__(self):
-        return ''.join([str(c) for c in self.cartas])
+        return ''.join([str(c) for c in self._cartas])
 
     def __eq__(self, other):
         self._checa_sanidade_eq(other)
@@ -159,7 +159,7 @@ class Mao:
         return self.rank < other.rank if self != other else self._compara_maior_carta(other)
 
     def _compara_maior_carta(self, other):
-        for i in range(Mao.TAMANHO):
+        for i in range(len(self._cartas)):
             if self.cartas[i].indice_valor != other.cartas[i].indice_valor:
                 return self.cartas[i].indice_valor < other.cartas[i].indice_valor
         return False
