@@ -54,18 +54,9 @@ class Jogo:
             print(f'* {ganhadores[0].nome} ganhou com {ganhadores[0].mao.tipo}.')
         else:
             print('== Empate ==')
-            print(f'* Houve empate entre: {", ".join([ganhador.nome for ganhador in ganhadores])} com {ganhadores[0].mao.tipo}.')
+            print(f'* Houve empate entre {", ".join([ganhador.nome for ganhador in ganhadores])} com {ganhadores[0].mao.tipo}.')
 
     def _determinar_ganhadores(self):
-        melhores_maos = []
-        melhor_mao = None
-
-        for jogador in self.jogadores:
-            mao = jogador.mao
-            if melhor_mao is None or mao > melhor_mao:
-                melhor_mao = mao
-                melhores_maos = [jogador]
-            elif mao == melhor_mao:
-                melhores_maos.append(jogador)
-
-        return melhores_maos
+        melhor_mao = max(jogador.mao.rank for jogador in self._jogadores)
+        ganhadores = [jogador for jogador in self._jogadores if jogador.mao.rank == melhor_mao]
+        return ganhadores
