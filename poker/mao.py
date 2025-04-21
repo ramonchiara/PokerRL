@@ -127,17 +127,20 @@ class Mao:
             self.is_straight_flush()
         ])
 
-    def trocar(self, quais, novas_cartas):
-        if len(quais) != Mao.TAMANHO:
-            raise ValueError(f'Quantidade inválida de quais cartas a trocar: {len(quais)}.')
-        if len(novas_cartas) != Mao.quantos_uns(quais):
+    def trocar(self, indices, novas_cartas):
+        if len(indices) != Mao.TAMANHO:
+            raise ValueError(f'Quantidade inválida de quais cartas a trocar: {len(indices)}.')
+        if len(novas_cartas) != Mao.quantos_uns(indices):
             raise ValueError(f'Quantidade inválida de novas cartas: {len(novas_cartas)}.')
-        self._cartas = self.cartas_from_indices(quais)
+        self._cartas = self._cartas_from_indices(indices, '0')
         self._cartas += novas_cartas
         self._ordena_cartas()
 
-    def cartas_from_indices(self, quais):
-        return [carta for carta, troca in zip(self._cartas, quais) if troca == '0']
+    def cartas_from_indices(self, indices):
+        return self._cartas_from_indices(indices, '1')
+
+    def _cartas_from_indices(self, indices, flag):
+        return [carta for carta, troca in zip(self._cartas, indices) if troca == flag]
 
     @staticmethod
     def quantos_uns(quais):
