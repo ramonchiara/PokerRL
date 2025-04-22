@@ -1,6 +1,6 @@
 import random
 
-from poker.estrategias_troca import EstrategiaTroca
+from .estrategia_troca import EstrategiaTroca
 
 
 class EstrategiaTrocaRandomica(EstrategiaTroca):

@@ -9,7 +9,4 @@ class EstrategiaTroca(ABC):
 
     @abstractmethod
     def _decidir_trocas(self, mao):
-        """
-        Deve retornar um número inteiro, cujo binário representa as cartas a serem trocadas.
-        """
-        pass
+        """ Deve retornar um número inteiro, cujo binário representa as cartas a serem trocadas. """
