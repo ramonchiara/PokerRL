@@ -50,7 +50,7 @@ def testa_estrategia(quantidade_testes, estrategia):
 
 
 def main():
-    quantidade_testes = 10000
+    quantidade_testes = 10_000
     estrategia = EstrategiaTrocaRandomica()
     estatisticas = testa_estrategia(quantidade_testes, estrategia)
     for tipo, porcentagem in estatisticas.items():
