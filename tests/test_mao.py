@@ -265,7 +265,7 @@ class MaoTest(unittest.TestCase):
         # quais será um sorteio de 0 a 2^Mao.TAMANHO-1, ou seja, 31 - ao transformar em binário, deve ter tamanho Mao.TAMANHO
         for trocas in range(2 ** Mao.TAMANHO):
             with self.subTest(f'test_ao_transformar_{trocas}_em_binario_deve_ter_tamanho_{Mao.TAMANHO}'):
-                quais = Mao.trocas_to_bin(trocas)
+                quais = Mao.trocas_to_indices(trocas)
                 self.assertEqual(Mao.TAMANHO, len(quais))
 
         # novas_cartas deve ter o tamanho da quantidade de cartas a serem trocadas

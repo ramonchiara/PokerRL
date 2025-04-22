@@ -147,8 +147,12 @@ class Mao:
         return sum(int(b) for b in quais)
 
     @staticmethod
-    def trocas_to_bin(trocas):
+    def trocas_to_indices(trocas):
         return bin(trocas)[2:].zfill(Mao.TAMANHO)
+
+    @staticmethod
+    def bin_to_trocas(indices):
+        return int(indices, 2)
 
     def __str__(self):
         return ''.join([str(c) for c in self._cartas])
