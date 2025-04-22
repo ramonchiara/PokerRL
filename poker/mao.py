@@ -151,7 +151,7 @@ class Mao:
         return bin(trocas)[2:].zfill(Mao.TAMANHO)
 
     @staticmethod
-    def bin_to_trocas(indices):
+    def indices_to_trocas(indices):
         return int(indices, 2)
 
     def __str__(self):
