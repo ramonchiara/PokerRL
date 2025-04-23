@@ -21,6 +21,10 @@ class Jogador:
     def mao(self):
         return self._mao
 
+    @property
+    def indices(self):
+        return self._indices
+
     def receber(self, cartas):
         if not self._mao:
             self._mao = Mao(cartas)

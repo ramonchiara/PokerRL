@@ -23,6 +23,19 @@ class BaralhoTest(unittest.TestCase):
         cartas_iniciais_de_um_baralho_novo = Carta.get_cartas('ApKpQpJp10p')
         self.assertEqual(cartas_iniciais_de_um_baralho_novo, cartas)
 
+    def test_quero_poder_distribuir_n_cartas_pre_determinadas(self):
+        baralho = Baralho()
+        baralho.embaralhar()
+        cartas = baralho.distribuir(5, '9c9e9o5p5o')
+        self.assertEqual(5, len(cartas))
+        self.assertEqual(47, len(baralho))
+        self.assertFalse(Carta(9, 'copas') in baralho)
+        self.assertFalse(Carta(9, 'espadas') in baralho)
+        self.assertFalse(Carta(9, 'ouros') in baralho)
+        self.assertFalse(Carta(5, 'paus') in baralho)
+        self.assertFalse(Carta(5, 'ouros') in baralho)
+
+
     def test_quero_poder_verificar_se_dois_baralhos_sao_iguais(self):
         b1 = Baralho()
         b2 = Baralho()

@@ -15,8 +15,14 @@ class Baralho:
     def embaralhar(self):
         random.shuffle(self._cartas)
 
-    def distribuir(self, n_cartas):
-        return [self._cartas.pop() for _ in range(n_cartas)]
+    def distribuir(self, n_cartas, cartas=None):
+        if not cartas:
+            return [self._cartas.pop() for _ in range(n_cartas)]
+        else:
+            cartas = Carta.get_cartas(cartas)
+            for carta in cartas:
+                self._cartas.remove(carta)
+            return cartas
 
     def __eq__(self, other):
         return self._cartas == other.cartas
