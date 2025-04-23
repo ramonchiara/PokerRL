@@ -10,7 +10,8 @@ class EstrategiaTrocaRL(EstrategiaTroca):
 
     def __init__(self):
         super().__init__()
-        self._tabela = np.ones((len(Mao.TIPOS), 2 ** Mao.TAMANHO))
+        # self._tabela = np.ones((len(Mao.TIPOS), 2 ** Mao.TAMANHO))
+        self._tabela = np.random.randint(EstrategiaTrocaRL.MIN, EstrategiaTrocaRL.MAX, size=(len(Mao.TIPOS), 2 ** Mao.TAMANHO))
 
     @property
     def tabela(self):
