@@ -13,7 +13,7 @@ def testa_estrategia(quantidade_testes, estrategia):
 
     for _ in range(quantidade_testes):
         # novo jogador
-        jogador = Jogador('Test', estrategia)
+        jogador = Jogador('Teste', estrategia)
 
         # novo baralho
         baralho = Baralho()
@@ -24,7 +24,7 @@ def testa_estrategia(quantidade_testes, estrategia):
         jogador.receber(cartas)
 
         # nossa mão atual
-        mao0 = jogador.mao.rank
+        mao_anterior = jogador.mao.rank
 
         # trocar cartas
         cartas_descartadas = jogador.decidir_trocas()
@@ -33,11 +33,11 @@ def testa_estrategia(quantidade_testes, estrategia):
         jogador.receber(novas_cartas)
 
         # nossa nova mão após trocas
-        mao = jogador.mao.rank
+        mao_posterior = jogador.mao.rank
 
-        if mao > mao0:
+        if mao_posterior > mao_anterior:
             estatisticas['melhorou'] += 1
-        elif mao < mao0:
+        elif mao_posterior < mao_anterior:
             estatisticas['piorou'] += 1
         else:
             estatisticas['empate'] += 1
