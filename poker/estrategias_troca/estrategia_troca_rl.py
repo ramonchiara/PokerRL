@@ -5,6 +5,8 @@ from poker.estrategias_troca.estrategia_troca import EstrategiaTroca
 
 
 class EstrategiaTrocaRL(EstrategiaTroca):
+    MIN = 1
+    MAX = 5000
 
     def __init__(self):
         super().__init__()
@@ -19,7 +21,7 @@ class EstrategiaTrocaRL(EstrategiaTroca):
     def registrar_resultado(self, rank_mao, indices, recompensa):
         trocas = Mao.indices_to_trocas(indices)
         peso = self._tabela[rank_mao, trocas]
-        if 1 <= (peso + recompensa) <= 1000:
+        if EstrategiaTrocaRL.MIN <= (peso + recompensa) <= EstrategiaTrocaRL.MAX:
             self._tabela[rank_mao, trocas] += recompensa
 
     def salvar(self, caminho):
