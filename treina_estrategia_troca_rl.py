@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
 from poker.baralho import Baralho
 from poker.estrategias_troca.estrategia_troca_rl import EstrategiaTrocaRL
 from poker.jogador import Jogador
@@ -55,10 +58,32 @@ def main():
         '9p8p7p6p5p'  # 'straight flush'
     ]
     for episodio in range(episodios_de_treinamento):
-        print(f'Treinamento {episodio} de {episodios_de_treinamento}...')
+        print(f'Treinamento {episodio} de {episodios_de_treinamento} ({(episodio / episodios_de_treinamento * 100):.1f}%)...')
+        if episodio % 1_000 == 0:
+            gerar_heatmap(estrategia_troca_rl.tabela, episodio)
         for cartas in tipos:
             treinamento(estrategia_troca_rl, cartas)
+
     estrategia_troca_rl.salvar(arquivo)
+
+
+def gerar_heatmap(tabela, episodio):
+    plt.figure(figsize=(18, 6))
+    heatmap = plt.imshow(tabela, cmap='YlGnBu', aspect='auto')
+
+    plt.title(f'Tabela de Pesos - Estratégia de Troca (RL) - Episódio {episodio}', fontsize=16)
+    plt.xlabel('Ações (trocas possíveis)', fontsize=12)
+    plt.ylabel('Mãos', fontsize=12)
+
+    cbar = plt.colorbar(heatmap)
+    cbar.set_label('Peso', fontsize=12)
+
+    plt.xticks(ticks=np.arange(tabela.shape[1]), labels=[format(i, '05b') for i in range(tabela.shape[1])], fontsize=8, rotation=45)
+    plt.yticks(ticks=np.arange(tabela.shape[0]), labels=Mao.TIPOS, fontsize=10)
+
+    plt.tight_layout()
+    plt.savefig(f'heatmap-{episodio}')
+    plt.close()
 
 
 if __name__ == '__main__':

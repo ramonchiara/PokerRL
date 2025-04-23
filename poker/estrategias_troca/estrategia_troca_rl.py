@@ -12,6 +12,10 @@ class EstrategiaTrocaRL(EstrategiaTroca):
         super().__init__()
         self._tabela = np.ones((len(Mao.TIPOS), 2 ** Mao.TAMANHO))
 
+    @property
+    def tabela(self):
+        return self._tabela
+
     def _decidir_trocas(self, mao):
         pesos_do_rank = self._tabela[mao.rank]
         probs = pesos_do_rank / pesos_do_rank.sum()
