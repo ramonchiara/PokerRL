@@ -1,7 +1,7 @@
 import numpy as np
 
-from poker.mao import Mao
 from poker.estrategias_troca.estrategia_troca import EstrategiaTroca
+from poker.mao import Mao
 
 
 class EstrategiaTrocaRL(EstrategiaTroca):
@@ -13,10 +13,9 @@ class EstrategiaTrocaRL(EstrategiaTroca):
         self._tabela = np.ones((len(Mao.TIPOS), 2 ** Mao.TAMANHO))
 
     def _decidir_trocas(self, mao):
-        rank_mao = mao.rank
-        pesos = self._tabela[rank_mao]
-        probs = pesos / pesos.sum()
-        return int(np.random.choice(len(pesos), p=probs))
+        pesos_do_rank = self._tabela[mao.rank]
+        probs = pesos_do_rank / pesos_do_rank.sum()
+        return int(np.random.choice(len(pesos_do_rank), p=probs))
 
     def registrar_resultado(self, rank_mao, indices, recompensa):
         trocas = Mao.indices_to_trocas(indices)
