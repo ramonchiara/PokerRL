@@ -7,9 +7,9 @@ from poker.jogador import Jogador
 from poker.mao import Mao
 
 
-def treinamento(estragegia_troca_rl, cartas):
+def treinamento(estrategia_troca_rl, cartas):
     # novo jogador
-    jogador = Jogador('Treinamento', estragegia_troca_rl)
+    jogador = Jogador('Treinamento', estrategia_troca_rl)
 
     # novo baralho
     baralho = Baralho()
@@ -32,13 +32,11 @@ def treinamento(estragegia_troca_rl, cartas):
     mao_posterior = jogador.mao.rank
 
     if mao_posterior > mao_anterior:
-        estragegia_troca_rl.registrar_resultado(mao_anterior, jogador.indices, 2)
+        estrategia_troca_rl.registrar_resultado(mao_anterior, jogador.indices, 2)
     elif mao_posterior < mao_anterior:
-        estragegia_troca_rl.registrar_resultado(mao_anterior, jogador.indices, -1)
+        estrategia_troca_rl.registrar_resultado(mao_anterior, jogador.indices, -1)
     else:
-        estragegia_troca_rl.registrar_resultado(mao_anterior, jogador.indices, 1)
-
-    return estragegia_troca_rl
+        estrategia_troca_rl.registrar_resultado(mao_anterior, jogador.indices, 1)
 
 
 def main():
