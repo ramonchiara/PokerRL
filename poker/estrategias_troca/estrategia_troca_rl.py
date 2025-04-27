@@ -8,10 +8,13 @@ class EstrategiaTrocaRL(EstrategiaTroca):
     MIN = 1
     MAX = 279
 
-    def __init__(self):
+    def __init__(self, caminho=None):
         super().__init__()
-        # self._tabela = np.ones((len(Mao.TIPOS), 2 ** Mao.TAMANHO))
-        self._tabela = np.random.randint(EstrategiaTrocaRL.MIN, EstrategiaTrocaRL.MAX, size=(len(Mao.TIPOS), 2 ** Mao.TAMANHO))
+        if caminho:
+            self.carregar(caminho)
+        else:
+            # self._tabela = np.ones((len(Mao.TIPOS), 2 ** Mao.TAMANHO))
+            self._tabela = np.random.randint(EstrategiaTrocaRL.MIN, EstrategiaTrocaRL.MAX, size=(len(Mao.TIPOS), 2 ** Mao.TAMANHO))
 
     @property
     def tabela(self):

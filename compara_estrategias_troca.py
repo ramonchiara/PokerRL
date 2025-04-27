@@ -1,5 +1,6 @@
 from poker.baralho import Baralho
 from poker.estrategias_troca.estrategia_troca_randomica import EstrategiaTrocaRandomica
+from poker.estrategias_troca.estrategia_troca_rl import EstrategiaTrocaRL
 from poker.jogador import Jogador
 from poker.mao import Mao
 
@@ -50,11 +51,22 @@ def testa_estrategia(quantidade_testes, estrategia):
 
 
 def main():
-    quantidade_testes = 10_000
-    estrategia = EstrategiaTrocaRandomica()
-    estatisticas = testa_estrategia(quantidade_testes, estrategia)
-    for tipo, porcentagem in estatisticas.items():
-        print(f'{tipo}: {porcentagem:.1f}%')
+    quantidade_testes = 1_000_000
+    configs = [
+        {'nome': 'Troca Aleatória', 'estrategia': EstrategiaTrocaRandomica()},
+        {'nome': 'RL Init 1 Max 279', 'estrategia': EstrategiaTrocaRL('tabela-treinamento-1-279.csv')},
+        {'nome': 'RL Init 1 Max 5000', 'estrategia': EstrategiaTrocaRL('tabela-treinamento-1-5000.csv')},
+        {'nome': 'RL Init Aleatório Max 279', 'estrategia': EstrategiaTrocaRL('tabela-treinamento-aleatorio-279.csv')},
+        {'nome': 'RL Init Aleatório Max 5000', 'estrategia': EstrategiaTrocaRL('tabela-treinamento-aleatorio-5000.csv')},
+    ]
+    for config in configs:
+        nome = config['nome']
+        estrategia = config['estrategia']
+        estatisticas = testa_estrategia(quantidade_testes, estrategia)
+        print(f'== Resultados para {nome} ==')
+        for tipo, porcentagem in estatisticas.items():
+            print(f'{tipo}: {porcentagem:.1f}%')
+        print()
 
 
 if __name__ == '__main__':
