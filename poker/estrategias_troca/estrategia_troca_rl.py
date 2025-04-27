@@ -6,7 +6,7 @@ from poker.mao import Mao
 
 class EstrategiaTrocaRL(EstrategiaTroca):
     MIN = 1
-    MAX = 5000
+    MAX = 279
 
     def __init__(self):
         super().__init__()
